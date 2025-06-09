@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineer Biryani - About Us</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000;
+      color: #ccc;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #f9a516;
+      color: #000;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .parallax-section {
+      background: url('https://images.unsplash.com/photo-1607330289197-905bafc7597f') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed;
+      padding: 5rem 2rem;
+    }
+
+    .content-box {
+      background-color: rgba(38, 37, 37, 0.95);
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .content-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      color: #f9a516;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: square;
+      margin-left: 1.5rem;
+      color: #eee;
+    }
+
+    .highlight {
+      color: #f9a516;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #111;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    #a h2 {
+      font-size: 17px;
+    }
+
+    .name h1 {
+      font-family: 'MS Gothic';
+      font-size: 70px;
+    }
+
+    .name {
+      height: 48px;
+      transform: translateY(-25px);
+    }
+
+    #s {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+        
+      gap: 30px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #f9a516;
+      gap: 300px;
+    }
+
+    a:hover {
+      border-bottom: solid #f9a516;
+      transition: 0.1s;
+      padding-bottom: 10px;
+    }
+
+    #a {
+      display: flex;
+    }
+
+    .team-section {
+      padding: 3rem 2rem;
+      background-color: #111;
+      color: #ccc;
+      text-align: center;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem;
+      justify-items: center;
+    }
+
+    .member {
+      cursor: pointer;
+      transition: transform 0.3s;
+      text-align: center;
+    }
+
+    .member:hover {
+      transform: scale(1.08);
+    }
+
+    .member img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #f9a516;
+      transition: 0.3s ease;
+    }
+
+    .member h5 {
+      margin-top: 1rem;
+      color: #eee;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+      background-color: #222;
+      margin: 10% auto;
+      padding: 2rem;
+      border: 2px solid #f9a516;
+      width: 90%;
+      max-width: 400px;
+      color: #eee;
+      text-align: center;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .modal-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #f9a516;
+      margin-bottom: 1rem;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 1.5rem;
+      color: #f9a516;
+      cursor: pointer;
+    }
+
+    .photo-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .insta-icon {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      
+      background-color: #f9a516;
+      color: #000;
+      padding: 10px;
+      border-radius: 50%;
+      display: none;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .photo-wrapper:hover .insta-icon {
+      display: block;
+    }
+
+    .insta-icon:hover {
+      background-color: #fff;
+      color: #f9a516;
+    }
+
+    #modal-insta {
+     
+      display: inline-block;
+      background-color: #f9a516;
+      color: #000;
+       padding: 10px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    #modal-insta:hover {
+      background-color: #fff;
+      color: #f9a516;
+    }
+
+    #a h2{
+     padding-left: 20px; 
+    }
+
+    @media(width : 600px){
+
+        #a #h2{
+            padding-left: -1000px;
+        }
+    }
+    
+  </style>
+</head>
+<body>
+  <div id="a">
+
+    <div id="s">
+      <h2><a href="homeb.html">HOME</a></h2>
+      <h2><a href="order.html">ORDER</a></h2>
+      <h2><a href="ABOUT.html">ABOUT</a></h2>
+    </div>
+  </div>
+
+  <style>
+
+  </style>
+
+  <header>Engineer Biryani</header>
+
+   <section class="parallax-section">
+    <div class="content-box" id="aboutBox">
+      <h2>About Us</h2>
+      <p><span class="highlight">Crafted with Passion. Delivered with Purpose.</span></p>
+      <p>
+        At Engineer Biryani, we believe that a hearty meal shouldn't come at the cost of your wallet—or the planet.
+        Born out of a simple idea to deliver authentic, flavorful biryani with zero waste and full satisfaction, we serve one goal: to make your Sunday lunch unforgettable.
+      </p>
+      <p>
+        We operate on a <span class="highlight">pre-order only model</span>, allowing you to book your biryani from Monday to Saturday for a fresh, piping hot delivery every Sunday.
+        This approach helps us control food waste, maintain quality, and deliver generous portions at affordable prices.
+      </p>
+      <p>Every biryani packet is designed to serve two people, with:</p>
+      <ul>
+        <li>Aromatic rice cooked with rich spices</li>
+        <li>Two juicy pieces of chicken</li>
+        <li>Accompanied by onion raita and pachadi</li>
+        <li>Free doorstep delivery</li>
+      </ul>
+      <p>
+        We’re not just serving food—we’re building a community of biryani lovers who appreciate taste, quantity, and value.
+        Whether you're a student, a working professional, or a family craving a special Sunday meal, Engineer Biryani has something special for you.
+      </p>
+      <p>
+        Why <span class="highlight">"Engineer Biryani"</span>? Because like every great engineering solution, our model is smart, efficient, and built to serve.
+      </p>
+      <p><strong>Pre-order once, enjoy twice the flavor. That’s our promise.</strong></p>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <h2>Meet Our Team</h2>
+    <div class="team-grid" id="teamGrid"></div>
+  </section>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span onclick="closeModal()" class="close">&times;</span>
+      <img id="modal-photo" src="" alt="Team Member Photo" class="modal-photo">
+      <h3 id="modal-name"></h3>
+      <p id="modal-info"></p>
+      <a id="modal-insta" href="#" target="_blank">Follow on Instagram</a>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Engineer Biryani. All rights reserved.
+  </footer>
+
+  <script>
+    const teamData = [
+      { name: "Mr. Amjatdbbd", title: "CFO of Operations", photo: "Pi7_Tool_IMG-20231102-WA0023 (1).jpg", insta: "https://instagram.com/amjatdbbd" },
+      { name: "Mr. Adsgsgs", title: "Head of Finance", photo: "IMG20240626124102.jpg", insta: "https://instagram.com/adsgsgs" },
+      { name: "Mr. Amjath Ali Khan", title: "Senior Advisor", photo: "WhatsApp Image 2025-05-17 at 19.58.22_01797664.jpg", insta: "https://instagram.com/amjathalikhan" },
+      { name: "Mr. vsdv", title: "Finance Analyst", photo: "WhatsApp Image 2025-05-17 at 19.58.23_23657aee.jpg", insta: "https://instagram.com/vsdv" },
+      { name: "Mr. ffbfdb", title: "Finance Executive", photo: "WhatsApp Image 2025-05-17 at 19.58.24_a1c8d328.jpg", insta: "https://instagram.com/ffbfdb" },
+      { name: "Mr.jaidev rajakrishna dharanidharan", title: "web designer and developer", photo: "jai.jpg", insta: "https://www.instagram.com/urwish.service?igsh=MWoxamFnc2tieWwzeQ==" }
+    ];
+
+    const grid = document.getElementById("teamGrid");
+    const modal = document.getElementById("modal");
+    const modalPhoto = document.getElementById("modal-photo");
+    const modalName = document.getElementById("modal-name");
+    const modalInfo = document.getElementById("modal-info");
+    const modalInsta = document.getElementById("modal-insta");
+
+    teamData.forEach(member => {
+      const div = document.createElement("div");
+      div.className = "member";
+      div.innerHTML = `
+        <div class="photo-wrapper">
+          <img src="${member.photo}" alt="${member.name}" />
+          
+          <a href="${member.insta}" target="_blank" class="insta-icon">
+            <i class="fab fa-instagram"></i>
+           
+          </a>
+        </div>
+        <h5>${member.name}</h5>
+         <h4>${member.title}</h4>
+      `;
+      div.addEventListener("click", () => {
+        modalPhoto.src = member.photo;
+        modalName.textContent = member.name;
+        modalInfo.textContent = member.title;
+        modalInsta.href = member.insta;
+        modal.style.display = "block";
+      });
+      grid.appendChild(div);
+    });
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+      if (event.target === modal) closeModal();
+    };
+
+    window.addEventListener('scroll', function () {
+      const aboutBox = document.getElementById('aboutBox');
+      const boxTop = aboutBox.getBoundingClientRect().top;
+      const screenHeight = window.innerHeight;
+      if (boxTop < screenHeight - 100) {
+        aboutBox.classList.add('visible');
+      }
+    });
+  </script>
+</body>
+</html>

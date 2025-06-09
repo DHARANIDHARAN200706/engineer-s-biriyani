@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>P A R  L O U R</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background-color: #000000;
+      color: #f9a516;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 50px;
+      background-color: #000;
+      flex-wrap: wrap;
+    }
+
+    header h2 {
+      color: #f9a516;
+      font-size: 17px;
+    }
+
+    header nav {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    header nav a {
+      margin-left: 30px;
+      text-decoration: none;
+      color: #f9a516;
+      white-space: nowrap;
+    }
+
+    header nav a:hover {
+      border-bottom: solid #f9a516;
+      padding-bottom: 10px;
+      transition: 0.3s;
+    }
+
+    .logo-section {
+      background-color: #000000;
+      border-bottom: solid #f9a516;
+      text-align: center;
+      padding: 20px 0;
+      position: relative;
+    }
+
+    .logo-section img {
+      width: 200px;
+      max-width: 90vw;
+      transform: translateY(-45px);
+    }
+
+    .logo-section h1 {
+      font-family: 'MS Gothic', monospace;
+      font-size: 70px;
+      color: white;
+      margin-top: -40px;
+      word-break: break-word;
+    }
+
+    .hero {
+      position: relative;
+      height: 650px;
+      background: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
+      z-index: 0;
+      overflow-x: hidden;
+    }
+
+    .hero img#girl {
+      position: absolute;
+      top: 70px;
+      left: 30px;
+      width: 600px;
+      max-width: 90vw;
+      animation: spin 10s linear infinite;
+    }
+
+    .hero .par {
+      position: absolute;
+      top: 100px;
+      right: 100px;
+      text-align: right;
+      max-width: 40vw;
+    }
+
+    .hero .par h4 {
+      font-size: 30px;
+      font-weight: lighter;
+    }
+
+    .hero .par h1 {
+      font-size: 100px;
+      font-family: 'MS Gothic', monospace;
+      margin: 0;
+      line-height: 1;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .section-title {
+      background: linear-gradient(to bottom, rgb(0, 0, 0), rgb(0, 0, 0));
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .section-title h1 {
+      font-family: 'MS Gothic', monospace;
+      font-size: 60px;
+      word-break: break-word;
+    }
+
+    .popular-section {
+      text-align: center;
+      padding: 50px 20px;
+      background-color: #111;
+      border-radius: 20px;
+      margin: 30px auto;
+      max-width: 1200px;
+    }
+
+    .popular-section h1 {
+      font-family: 'MS Gothic', monospace;
+    }
+
+    .popular-section h3 {
+      font-weight: lighter;
+      margin: 20px 0;
+    }
+
+    .popular-items {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .item {
+      width: 250px;
+      background-color: #000;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .item:hover {
+      transform: scale(1.05);
+    }
+
+    .item img {
+      width: 100%;
+      transition: 0.5s;
+      display: block;
+    }
+
+    .item:hover img {
+      transform: scale(1.6);
+    }
+
+    .item h4 {
+      padding: 10px;
+      color: white;
+      text-align: center;
+    }
+
+    .why-choose {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #111;
+      color: white;
+      padding: 50px 20px;
+      border-radius: 20px;
+      margin: 30px auto;
+      max-width: 1200px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .why-choose div {
+      max-width: 600px;
+      flex: 1 1 300px;
+    }
+
+    .why-choose img {
+      width: 400px;
+      max-width: 90vw;
+      border-radius: 50%;
+      animation: spin 10s linear infinite;
+      flex: 1 1 300px;
+      object-fit: cover;
+    }
+
+    footer {
+      background: #f9a516;
+      color: #000;
+      text-align: center;
+      padding: 30px 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    footer button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-weight: bold;
+      background: #000;
+      color: #f9a516;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 1024px) {
+      header {
+        padding: 10px 20px;
+      }
+
+      .hero img#girl {
+        width: 400px;
+        top: 50px;
+        left: 20px;
+      }
+
+      .hero .par {
+        right: 20px;
+        max-width: 50vw;
+      }
+
+      .hero .par h4 {
+        font-size: 24px;
+      }
+
+      .hero .par h1 {
+        font-size: 120px;
+      }
+
+      .section-title h1 {
+        font-size: 48px;
+      }
+
+      .popular-section {
+        padding: 40px 15px;
+        max-width: 95vw;
+      }
+
+      .popular-items {
+        gap: 15px;
+      }
+
+      .item {
+        width: 200px;
+      }
+
+      .why-choose {
+        flex-direction: column;
+        padding: 40px 15px;
+      }
+
+      .why-choose img {
+        width: 300px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 10px 15px;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      header nav a {
+        margin-left: 15px;
+        font-size: 14px;
+      }
+
+      .logo-section img {
+        width: 150px;
+        transform: translateY(-30px);
+      }
+
+      .logo-section h1 {
+        font-size: 40px;
+        margin-top: -30px;
+      }
+
+      .hero {
+        height: auto;
+        padding-bottom: 20px;
+      }
+
+      .hero img#girl {
+        position: relative;
+        width: 90vw;
+        max-width: 350px;
+        top: auto;
+        left: auto;
+        transform: none;
+        animation: spin 15s linear infinite;
+        margin: 0 auto 20px auto;
+        display: block;
+      }
+
+      .hero .par {
+        position: relative;
+        right: auto;
+        text-align: center;
+        max-width: 100%;
+        padding: 0 10px;
+      }
+
+      .hero .par h4 {
+        font-size: 20px;
+      }
+
+      .hero .par h1 {
+        font-size: 30px;
+        word-break: break-word;
+      }
+
+      .section-title h1 {
+        font-size: 36px;
+      }
+
+      .popular-section {
+        padding: 30px 10px;
+        max-width: 100vw;
+        border-radius: 0;
+      }
+
+      .popular-items {
+        gap: 10px;
+      }
+
+      .item {
+        width: 45vw;
+        max-width: 250px;
+      }
+
+      .why-choose {
+        padding: 30px 10px;
+        border-radius: 0;
+      }
+
+      .why-choose div {
+        max-width: 100%;
+        padding: 0 10px;
+      }
+
+      .why-choose img {
+        width: 80vw;
+        max-width: 300px;
+        margin: 20px auto 0 auto;
+        border-radius: 50%;
+      }
+
+      footer {
+        padding: 20px 10px;
+      }
+
+      footer button {
+        padding: 8px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2>ORDER TODAY:</h2>
+    <nav>
+      <a href="homeb.html">HOME</a>
+      <a href="order.html">ORDER</a>
+      <a href="ABOUT.html">ABOUT</a>
+    </nav>
+  </header>
+
+  <div class="logo-section">
+    <img src="Engineers biriyani.png" alt="Logo" />
+    <h1>ENGINEERS BIRIYANI</h1>
+  </div>
+
+  <div class="hero">
+    <img id="girl" src="Chicken-Biryani-Recipe-removebg-preview.png" alt="Biryani Girl" />
+    <div class="par">
+      <h4>THE TASTE OF TRADITION</h4>
+      <h1 >BIRIYANI</h1>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <h1>MAKING UP YOUR TASTE</h1>
+  </div>
+
+  <section class="popular-section">
+    <h1>OUR POPULAR BIRYANI SPECIALS</h1>
+    <h3>"Indulge in our finest biryanis, crafted with the best ingredients and spices. Choose from our range of biryani collections and treat yourself to the finest meal!"</h3>
+    <div class="popular-items">
+      <div class="item">
+        <img src="file_00000000b3a061f89149bdd4b9653ad2.png" alt="Chicken Biryani" />
+        <h4>CHICKEN BIRIYANI</h4>
+      </div>
+      <div class="item">
+        <img src="file_00000000640461f79cb4de80489411a9.png" alt="Mutton Biryani" />
+        <h4>CHICKEN CHILLI</h4>
+      </div>
+      <div class="item">
+        <img src="file_000000002e9861fdbea97d5bd6ef5264.png" alt="Egg Biryani" />
+        <h4>BREAD HALWA</h4>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .item{
+       
+    }
+  </style>
+
+  <section class="why-choose">
+    <div>
+      <h2>Why Choose Engineers Biryani?</h2>
+      <p>Experience the unique flavors and rich heritage of our traditional biryani recipes, made fresh daily with the highest quality ingredients.</p>
+      <p>We bring you a perfect blend of spices and love in every bite.</p>
+    </div>
+    <img src="Chicken-Biryani-Recipe-removebg-preview.png" alt="Why Choose Us" />
+  </section>
+
+  <footer>
+    <p>© 2025 Engineers Biryani. All rights reserved.</p>
+    <button>Contact Us</button>
+  </footer>
+
+</body>
+</html>
