@@ -3,177 +3,325 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Book Now</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Order Now | Engineer's Biryani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
   <style>
-    body {
+    :root {
+      --primary: #f9a516;
+      --primary-hover: #ffb742;
+      --bg-dark: #0a0a0a;
+      --card-bg: #161616;
+      --text-gray: #b0b0b0;
+      --glass: rgba(255, 255, 255, 0.05);
+      --disabled: #333;
+    }
+
+    * {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #f9a516;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- Navigation --- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(249, 165, 22, 0.2);
+    }
+
+    .logo h2 {
+      color: var(--primary);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+    }
+
+    .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    /* --- Layout --- */
+    .order-wrapper {
+      flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      padding: 40px 5%;
     }
 
     .form-container {
-       background: rgba(255, 255, 255, 0.275);
-      backdrop-filter: blur(20px);
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-      width: 370px;
-      text-align: center;
-     
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
 
     .form-container h1 {
-      font-size: 24px;
-      color: #000;
-      margin-bottom: 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+      text-align: center;
     }
 
-    .form-group {
-      margin-bottom: 15px;
-      text-align: left;
+    .form-container p {
+      color: var(--text-gray);
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 0.9rem;
     }
 
+    /* --- Location Card --- */
+    .location-box {
+      background: rgba(249, 165, 22, 0.05);
+      border: 1px dashed var(--primary);
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .location-box i { color: var(--primary); font-size: 1.2rem; }
+    .location-box span { font-size: 0.8rem; color: #ddd; line-height: 1.4; }
+
+    /* --- Form Elements --- */
+    .form-group { margin-bottom: 20px; }
+    
     label {
-      font-size: 14px;
-      font-weight: 600;
-      color: white;
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    input, textarea, select {
+    input, textarea {
       width: 100%;
-      background: rgba(249, 249, 249, 0.685);
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      margin-top: 5px;
+      background: #222;
+      padding: 12px 15px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      color: white;
       font-size: 14px;
       transition: 0.3s;
     }
 
-    input:focus, select:focus, textarea:focus {
-      border-color: #f9a516;
-      box-shadow: 0 0 8px #f9a516;
+    input:focus, textarea:focus {
+      border-color: var(--primary);
       outline: none;
+      background: #2a2a2a;
     }
 
+    /* --- Disabled Fields Styling --- */
+    input:disabled {
+      background: #111;
+      border-color: #222;
+      color: #555;
+      cursor: not-allowed;
+    }
+
+    .disabled-label {
+      opacity: 0.5;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .coming-soon-tag {
+      font-size: 10px;
+      background: #333;
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: #777;
+    }
+
+    /* --- Submit Button --- */
     .btn {
       width: 100%;
-      padding: 12px;
+      padding: 16px;
       font-size: 16px;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-      background: #f9a516;
+      font-weight: 800;
+      background: var(--primary);
       color: black;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-transform: uppercase;
+      margin-top: 10px;
     }
 
-    .btn:hover {
-      background: #f89d0c;
+    .btn:hover:not(:disabled) {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(249, 165, 22, 0.3);
+    }
+
+    .btn:disabled {
+      background: #444;
+      cursor: not-allowed;
+      color: #777;
     }
 
     .message {
       display: none;
-      margin-top: 15px;
-      font-weight: bold;
-      color: black;
+      margin-top: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      text-align: center;
+      background: rgba(249, 165, 22, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      background: #000;
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    @media (max-width: 600px) {
+      .form-container { padding: 25px; margin: 10px; }
+      header { flex-direction: column; gap: 10px; }
+      .nav-links a { margin: 0 10px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="form-container">
-    <h1>ORDER NOW</h1>
-    <form id="form">
-      <div class="form-group">
-        <label>Name</label>
-        <input type="text" name="name" placeholder="Your Name" required />
+  <header>
+    <div class="logo">
+      <h2>ENGINEER'S</h2>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="order.html">Order</a>
+      <a href="ABOUT.html">About</a>
+    </nav>
+  </header>
+
+  <div class="order-wrapper">
+    <div class="form-container">
+      <h1>Place Order</h1>
+      <p>Fill in the details to engineering your perfect meal.</p>
+
+      <div class="location-box">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>
+          <strong>Delivery/Pickup Hub:</strong><br>
+          Coimbatore Institute of Technology, Avinashi Road, Coimbatore - 641 014.
+        </span>
       </div>
 
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" name="email" placeholder="Your Email" required />
-      </div>
+      <form id="form">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" name="name" placeholder="Enter your name" required />
+        </div>
 
-      <div class="form-group">
-        <label>Phone</label>
-        <input type="tel" name="phone" placeholder="10-digit Phone Number" pattern="\d{10}" required />
-      </div>
+        <div style="display: flex; gap: 15px;">
+          <div class="form-group" style="flex: 1.5;">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" placeholder="10-digit number" pattern="\d{10}" required />
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label>Order Date</label>
+            <input type="date" name="date" id="date" required />
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label>Date</label>
-        <input type="date" name="date" id="date" required />
-      </div>
+        <div class="form-group">
+          <label>Quantity of Biryani (Rs 99)</label>
+          <input type="number" name="quantity" min="1" value="1" required />
+        </div>
 
-      <div class="form-group">
-        <label>You want breadhalwa?</label>
-        <input name="briyani" placeholder="yes / no / quantity" />
-      </div>
+        <div class="form-group">
+          <label class="disabled-label">
+            Chicken Chilli 
+            <span class="coming-soon-tag">Coming Soon</span>
+          </label>
+          <input type="text" name="chilli" placeholder="Currently Unavailable" disabled />
+        </div>
 
-      <div class="form-group">
-        <label>You want chicken chilli?</label>
-        <input name="chilli" placeholder="yes / no / quantity" />
-      </div>
+        <div class="form-group">
+          <label class="disabled-label">
+            Bread Halwa 
+            <span class="coming-soon-tag">Coming Soon</span>
+          </label>
+          <input type="text" name="briyani" placeholder="Currently Unavailable" disabled />
+        </div>
 
-      <div class="form-group">
-        <label>Quantity of biriyani</label>
-        <input type="number" name="quantity" min="1" value="1" required />
-      </div>
+        <div class="form-group">
+          <label>Special Instructions</label>
+          <textarea name="feedback" rows="2" placeholder="Any preferences? (e.g., extra spicy)"></textarea>
+        </div>
 
-      <div class="form-group">
-        <label>Feedback</label>
-        <textarea name="feedback" placeholder="like extra spicy or something....."></textarea>
-      </div>
+        <input type="hidden" name="email" value="customer@cit.edu.in">
 
-      <button class="btn" type="submit" id="submit-button">Submit</button>
-    </form>
+        <button class="btn" type="submit" id="submit-button">Confirm Order</button>
+      </form>
 
-    <div id="message" class="message">Submitting...</div>
+      <div id="message" class="message">Processing...</div>
+    </div>
   </div>
 
+  <footer>
+    © 2025 Engineers Biryani | Handcrafted with Precision
+  </footer>
+
   <script>
-    // Set min date to today
+    // Set min date to today for the date picker
     document.addEventListener("DOMContentLoaded", function () {
       const today = new Date().toISOString().split("T")[0];
       document.getElementById("date").setAttribute("min", today);
+      document.getElementById("date").value = today;
     });
 
-    // Email and phone validation
     document.getElementById("form").addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const email = this.email.value.trim();
-      const phone = this.phone.value.trim();
-      const date = this.date.value;
+      const submitBtn = document.getElementById("submit-button");
+      const msgDiv = document.getElementById("message");
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const phoneRegex = /^\d{10}$/;
-      const today = new Date().toISOString().split("T")[0];
-
-      if (!emailRegex.test(email)) {
-        alert("Please enter a valid email address.");
-        return;
-      }
-
-      if (!phoneRegex.test(phone)) {
-        alert("Please enter a valid 10-digit phone number.");
-        return;
-      }
-
-      if (date < today) {
-        alert("Please select a future date.");
-        return;
-      }
-
-      document.getElementById("message").textContent = "Submitting...";
-      document.getElementById("message").style.display = "block";
-      document.getElementById("submit-button").disabled = true;
+      msgDiv.textContent = "Connecting to Server...";
+      msgDiv.style.display = "block";
+      submitBtn.disabled = true;
 
       const formData = new FormData(this);
       const formDataString = new URLSearchParams(formData).toString();
@@ -188,17 +336,20 @@
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
-          document.getElementById("message").textContent = "Order placed successfully!";
-          document.getElementById("form").reset();
+          msgDiv.textContent = "Order Placed Successfully!";
+          msgDiv.style.color = "#f9a516";
+          this.reset();
         } else {
-          document.getElementById("message").textContent = data.message || "Error submitting form.";
+          msgDiv.textContent = "Error: " + (data.message || "Submission failed.");
+          msgDiv.style.color = "#ff4444";
         }
-        document.getElementById("submit-button").disabled = false;
-        setTimeout(() => (document.getElementById("message").style.display = "none"), 2600);
+        submitBtn.disabled = false;
+        setTimeout(() => (msgDiv.style.display = "none"), 5000);
       })
-      .catch(() => {
-        document.getElementById("message").textContent = "An error occurred while submitting.";
-        document.getElementById("submit-button").disabled = false;
+      .catch((error) => {
+        msgDiv.textContent = "Network Error. Please try again.";
+        msgDiv.style.color = "#ff4444";
+        submitBtn.disabled = false;
       });
     });
   </script>
