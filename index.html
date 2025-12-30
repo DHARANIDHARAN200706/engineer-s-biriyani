@@ -3,459 +3,287 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ENGNEER'S BIRIYANI</title>
+  <title>ENGINEER'S BIRIYANI | The Taste of Tradition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  
   <style>
+    :root {
+      --primary: #f9a516;
+      --primary-hover: #ffb742;
+      --bg-dark: #000000;
+      --card-bg: #0f0f0f;
+      --text-gray: #b0b0b0;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     body {
-      background-color: #000000;
-      color: #f9a516;
-      width: 100%;
-      min-height: 100vh;
+      background-color: var(--bg-dark);
+      color: white;
+      overflow-x: hidden;
+      line-height: 1.6;
     }
 
+    /* --- Header & Logo --- */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 50px;
-      background-color: #000;
-      flex-wrap: wrap;
+      padding: 15px 5%;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(249, 165, 22, 0.3);
     }
 
-    header h2 {
-      color: #f9a516;
-      font-size: 17px;
-    }
-
-    header nav {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    header nav a {
-      margin-left: 30px;
-      text-decoration: none;
-      color: #f9a516;
-      white-space: nowrap;
-    }
-
-    header nav a:hover {
-      border-bottom: solid #f9a516;
-      padding-bottom: 10px;
+    .header-logo {
+      height: 50px;
       transition: 0.3s;
     }
 
-    .logo-section {
-      background-color: #000000;
-      border-bottom: solid #f9a516;
-      text-align: center;
-      padding: 20px 0;
-      position: relative;
-    }
-
-    .logo-section img {
-      width: 200px;
-      max-width: 90vw;
-      transform: translateY(-45px);
-    }
-
-    .logo-section h1 {
-      font-family: 'MS Gothic', monospace;
-      font-size: 70px;
+    .nav-links a {
+      margin-left: 25px;
+      text-decoration: none;
       color: white;
-      margin-top: -40px;
-      word-break: break-word;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: 0.3s;
     }
 
+    .nav-links a:hover { color: var(--primary); }
+
+    /* --- Hero Section --- */
     .hero {
-      position: relative;
-      height: 650px;
-      background: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
-      z-index: 0;
-      overflow-x: hidden;
-    }
-
-    .hero img#girl {
-      position: absolute;
-      top: 70px;
-      left: 30px;
-      width: 600px;
-      max-width: 90vw;
-      animation: spin 10s linear infinite;
-    }
-
-    .hero .par {
-      position: absolute;
-      top: 100px;
-      right: 100px;
-      text-align: right;
-      max-width: 40vw;
-    }
-
-    .hero .par h4 {
-      font-size: 30px;
-      font-weight: lighter;
-    }
-
-    .hero .par h1 {
-      font-size: 100px;
-      font-family: 'MS Gothic', monospace;
-      margin: 0;
-      line-height: 1;
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    .section-title {
-      background: linear-gradient(to bottom, rgb(0, 0, 0), rgb(0, 0, 0));
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    .section-title h1 {
-      font-family: 'MS Gothic', monospace;
-      font-size: 60px;
-      word-break: break-word;
-    }
-
-    .popular-section {
-      text-align: center;
-      padding: 50px 20px;
-      background-color: #111;
-      border-radius: 20px;
-      margin: 30px auto;
-      max-width: 1200px;
-    }
-
-    .popular-section h1 {
-      font-family: 'MS Gothic', monospace;
-    }
-
-    .popular-section h3 {
-      font-weight: lighter;
-      margin: 20px 0;
-    }
-
-    .popular-items {
       display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .item {
-      width: 250px;
-      background-color: #000;
-      border-radius: 20px;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
-
-    .item:hover {
-      transform: scale(1.05);
-    }
-
-    .item img {
-      width: 100%;
-      transition: 0.5s;
-      display: block;
-    }
-
-    .item:hover img {
-      transform: scale(1.6);
-    }
-
-    .item h4 {
-      padding: 10px;
-      color: white;
-      text-align: center;
-    }
-
-    .why-choose {
-      display: flex;
-      justify-content: space-around;
+      flex-direction: row;
       align-items: center;
-      background-color: #111;
-      color: white;
-      padding: 50px 20px;
-      border-radius: 20px;
-      margin: 30px auto;
-      max-width: 1200px;
-      flex-wrap: wrap;
-      gap: 20px;
+      justify-content: space-between;
+      padding: 60px 8%;
+      min-height: 70vh;
+      gap: 30px;
     }
 
-    .why-choose div {
-      max-width: 600px;
-      flex: 1 1 300px;
+    .hero-content { flex: 1; }
+    .hero-image { flex: 1; display: flex; justify-content: center; }
+
+    .hero-content h4 {
+      color: var(--primary);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
     }
 
-    .why-choose img {
-      width: 400px;
-      max-width: 90vw;
-      border-radius: 50%;
-      animation: spin 10s linear infinite;
-      flex: 1 1 300px;
-      object-fit: cover;
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
     }
 
-    footer {
-      background: #f9a516;
-      color: #000;
+    .hero-image img {
+      width: 100%;
+      max-width: 500px;
+      filter: drop-shadow(0 0 30px rgba(249, 165, 22, 0.4));
+      animation: spin-slow 20s linear infinite;
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* --- Branding Splash --- */
+    .branding-section {
+        text-align: center;
+        padding: 40px 20px;
+        border-bottom: 1px solid var(--primary);
+    }
+    .branding-section img {
+        width: 180px;
+        margin-bottom: 10px;
+    }
+    .branding-section h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+    }
+
+    /* --- Menu Grid --- */
+    .section-container {
+      padding: 80px 5%;
       text-align: center;
-      padding: 30px 20px;
-      font-family: Arial, sans-serif;
     }
 
-    footer button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-weight: bold;
-      background: #000;
-      color: #f9a516;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 25px;
+      padding: 25px;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* Pricing & Badges */
+    .price-tag {
+        margin: 15px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+    }
+    .old-price { text-decoration: line-through; color: #666; font-size: 1.1rem; }
+    .new-price { color: var(--primary); font-size: 1.6rem; font-weight: 800; }
+
+    .coming-soon {
+        display: inline-block;
+        padding: 6px 20px;
+        border: 1px dashed var(--primary);
+        color: var(--primary);
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+
+    .unavailable-img { filter: grayscale(1); opacity: 0.5; }
+
+    /* --- CTA Button --- */
+    .btn {
+      background: var(--primary);
+      color: black;
+      padding: 14px 35px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 800;
+      display: inline-block;
+      transition: 0.3s;
       border: none;
-      border-radius: 5px;
       cursor: pointer;
     }
 
-    /* Responsive styles */
-    @media (max-width: 1024px) {
-      header {
-        padding: 10px 20px;
-      }
-
-      .hero img#girl {
-        width: 400px;
-        top: 50px;
-        left: 20px;
-      }
-
-      .hero .par {
-        right: 20px;
-        max-width: 50vw;
-      }
-
-      .hero .par h4 {
-        font-size: 24px;
-      }
-
-      .hero .par h1 {
-        font-size: 120px;
-      }
-
-      .section-title h1 {
-        font-size: 48px;
-      }
-
-      .popular-section {
-        padding: 40px 15px;
-        max-width: 95vw;
-      }
-
-      .popular-items {
-        gap: 15px;
-      }
-
-      .item {
-        width: 200px;
-      }
-
-      .why-choose {
-        flex-direction: column;
-        padding: 40px 15px;
-      }
-
-      .why-choose img {
-        width: 300px;
-        margin: 0 auto;
-      }
+    .btn:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 0 20px rgba(249, 165, 22, 0.5);
     }
 
-    @media (max-width: 600px) {
-      header {
-        padding: 10px 15px;
-        flex-direction: column;
-        gap: 10px;
-      }
+    /* --- Footer --- */
+    footer {
+      padding: 60px 5%;
+      background: var(--primary);
+      color: black;
+      text-align: center;
+    }
 
-      header nav a {
-        margin-left: 15px;
-        font-size: 14px;
-      }
-
-      .logo-section img {
-        width: 150px;
-        transform: translateY(-30px);
-      }
-
-      .logo-section h1 {
-        font-size: 40px;
-        margin-top: -30px;
-      }
-
-      .hero {
-        height: auto;
-        padding-bottom: 20px;
-      }
-
-      .hero img#girl {
-        position: relative;
-        width: 90vw;
-        max-width: 350px;
-        top: auto;
-        left: auto;
-        transform: none;
-        animation: spin 15s linear infinite;
-        margin: 0 auto 20px auto;
-        display: block;
-      }
-
-      .hero .par {
-        position: relative;
-        right: auto;
-        text-align: center;
-        max-width: 100%;
-        padding: 0 10px;
-      }
-
-      .hero .par h4 {
-        font-size: 20px;
-      }
-
-      .hero .par h1 {
-        font-size: 30px;
-        word-break: break-word;
-      }
-
-      .section-title h1 {
-        font-size: 36px;
-      }
-
-      .popular-section {
-        padding: 30px 10px;
-        max-width: 100vw;
-        border-radius: 0;
-      }
-
-      .popular-items {
-        gap: 10px;
-      }
-
-      .item {
-        width: 45vw;
-        max-width: 250px;
-      }
-
-      .why-choose {
-        padding: 30px 10px;
-        border-radius: 0;
-      }
-
-      .why-choose div {
-        max-width: 100%;
-        padding: 0 10px;
-      }
-
-      .why-choose img {
-        width: 80vw;
-        max-width: 300px;
-        margin: 20px auto 0 auto;
-        border-radius: 50%;
-      }
-
-      footer {
-        padding: 20px 10px;
-      }
-
-      footer button {
-        padding: 8px 15px;
-      }
+    /* --- Responsive Queries --- */
+    @media (max-width: 768px) {
+      header { flex-direction: column; gap: 15px; }
+      .nav-links a { margin: 0 10px; font-size: 11px; }
+      .hero { flex-direction: column-reverse; text-align: center; }
+      .hero-image img { max-width: 300px; }
+      .branding-section h2 { font-size: 1.8rem; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h2>ORDER TODAY:</h2>
-    <nav>
+    <img src="Engineers biriyani.png" alt="Logo" class="header-logo">
+    <nav class="nav-links">
       <a href="index.html">HOME</a>
       <a href="order.html">ORDER</a>
       <a href="ABOUT.html">ABOUT</a>
     </nav>
   </header>
 
-  <div class="logo-section">
-    <img src="Engineers biriyani.png" alt="Logo" />
-    <h1>ENGINEERS BIRIYANI</h1>
+  <div class="branding-section">
+      <img src="Engineers biriyani.png" alt="Logo">
+      <h2>ENGINEERS BIRIYANI</h2>
   </div>
 
-  <div class="hero">
-    <img id="girl" src="Chicken-Biryani-Recipe-removebg-preview.png" alt="Biryani Girl" />
-    <div class="par">
-      <h4>THE TASTE OF TRADITION</h4>
-      <h1 >BIRIYANI</h1>
+  <section class="hero">
+    <div class="hero-content">
+      <h4>Master of Spices</h4>
+      <h1>THE TASTE OF <span style="color: var(--primary);">TRADITION</span></h1>
+      <p style="color: var(--text-gray); margin-bottom: 30px;">
+        Every grain is engineered for the perfect bite. Experience the finest blend of spices and premium quality ingredients.
+      </p>
+      <a href="#menu" class="btn">VIEW MENU</a>
     </div>
-  </div>
+    <div class="hero-image">
+      <img src="Chicken-Biryani-Recipe-removebg-preview.png" alt="Signature Biryani">
+    </div>
+  </section>
 
-  <div class="section-title">
-    <h1>MAKING UP YOUR TASTE</h1>
-  </div>
+  <section class="section-container" id="menu">
+    <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; margin-bottom: 10px;">POPULAR SPECIALS</h2>
+    <p style="color: var(--text-gray);">Indulge in our finest collections</p>
 
-  <section class="popular-section">
-    <h1>OUR POPULAR BIRYANI SPECIALS</h1>
-    <h3>"Indulge in our finest biryanis, crafted with the best ingredients and spices. Choose from our range of biryani collections and treat yourself to the finest meal!"</h3>
-    <div class="popular-items">
-      <div class="item">
-        <img src="file_00000000b3a061f89149bdd4b9653ad2.png" alt="Chicken Biryani" />
-        <h4>CHICKEN BIRIYANI</h4>
+    <div class="grid">
+      <div class="card">
+        <img src="file_00000000b3a061f89149bdd4b9653ad2.png" alt="Chicken Biryani">
+        <h3>CHICKEN BIRIYANI</h3>
+        <div class="price-tag">
+            <span class="old-price">Rs 199</span>
+            <span class="new-price">Rs 99</span>
+        </div>
+        <a href="order.html" class="btn" style="padding: 10px 20px; font-size: 0.8rem;">ORDER NOW</a>
       </div>
-      <div class="item">
-        <img src="file_00000000640461f79cb4de80489411a9.png" alt="Mutton Biryani" />
-        <h4>CHICKEN CHILLI</h4>
+
+      <div class="card">
+        <img src="file_00000000640461f79cb4de80489411a9.png" class="unavailable-img" alt="Chicken Chilli">
+        <h3>CHICKEN CHILLI</h3>
+        <span class="coming-soon">COMING SOON</span>
       </div>
-      <div class="item">
-        <img src="file_000000002e9861fdbea97d5bd6ef5264.png" alt="Egg Biryani" />
-        <h4>BREAD HALWA</h4>
+
+      <div class="card">
+        <img src="file_000000002e9861fdbea97d5bd6ef5264.png" class="unavailable-img" alt="Bread Halwa">
+        <h3>BREAD HALWA</h3>
+        <span class="coming-soon">COMING SOON</span>
       </div>
     </div>
   </section>
 
-  <style>
-    .item{
-       
-    }
-  </style>
-
-  <section class="why-choose">
-    <div>
-      <h2>Why Choose Engineers Biryani?</h2>
-      <p>Experience the unique flavors and rich heritage of our traditional biryani recipes, made fresh daily with the highest quality ingredients.</p>
-      <p>We bring you a perfect blend of spices and love in every bite.</p>
-    </div>
-    <img src="Chicken-Biryani-Recipe-removebg-preview.png" alt="Why Choose Us" />
+  <section class="section-container" style="background: #0a0a0a; border-radius: 50px 50px 0 0;">
+      <h2 style="font-family: 'Playfair Display'; margin-bottom: 20px;">Why Choose Us?</h2>
+      <div style="max-width: 700px; margin: 0 auto; color: var(--text-gray);">
+          <p>We bring you a perfect blend of spices and love in every bite. Made fresh daily with the highest quality ingredients, our biryani is a celebration of flavor.</p>
+          <img src="Chicken-Biryani-Recipe-removebg-preview.png" style="width: 150px; margin-top: 30px; opacity: 0.6;">
+      </div>
   </section>
 
   <footer>
-    <p>© 2025 Engineers Biryani. All rights reserved.</p>
-    <button>Contact Us</button>
+    <p style="font-weight: 800; margin-bottom: 10px;">© 2025 ENGINEERS BIRIYANI. ALL RIGHTS RESERVED.</p>
+    <button style="background: black; color: var(--primary); padding: 10px 25px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">CONTACT US</button>
   </footer>
 
 </body>
