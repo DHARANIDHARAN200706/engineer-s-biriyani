@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Order Now | Engineer's Biryani</title>
+  <title>Confirm Order | Engineer's Biryani</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
   <style>
     :root {
       --primary: #f9a516;
@@ -16,8 +16,7 @@
       --bg-dark: #0a0a0a;
       --card-bg: #161616;
       --text-gray: #b0b0b0;
-      --glass: rgba(255, 255, 255, 0.05);
-      --disabled: #333;
+      --disabled-text: #666;
     }
 
     * {
@@ -35,12 +34,12 @@
       flex-direction: column;
     }
 
-    /* --- Navigation --- */
-    header {
+    /* --- Navigation & Logo --- */
+    header.nav-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 5%;
+      padding: 10px 5%;
       background: rgba(0,0,0,0.95);
       backdrop-filter: blur(10px);
       position: sticky;
@@ -49,10 +48,15 @@
       border-bottom: 1px solid rgba(249, 165, 22, 0.2);
     }
 
-    .logo h2 {
-      color: var(--primary);
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
+    .header-logo {
+      height: 55px; /* Adjust height as needed based on your actual logo file */
+      width: auto;
+      display: block;
+      transition: 0.3s;
+    }
+    
+    .header-logo:hover {
+        transform: scale(1.05);
     }
 
     .nav-links a {
@@ -68,166 +72,120 @@
 
     .nav-links a:hover { color: var(--primary); }
 
-    /* --- Layout --- */
-    .order-wrapper {
+    /* --- Form Section --- */
+    .order-section {
       flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 40px 5%;
+      padding: 40px 20px;
+      background: radial-gradient(circle at top right, rgba(249, 165, 22, 0.05), transparent);
     }
 
     .form-container {
       background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       padding: 40px;
       border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.4);
       width: 100%;
       max-width: 500px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
 
     .form-container h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: var(--primary);
-      margin-bottom: 8px;
+      margin-bottom: 20px;
       text-align: center;
     }
 
-    .form-container p {
-      color: var(--text-gray);
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 0.9rem;
+    .form-group {
+      margin-bottom: 18px;
     }
 
-    /* --- Location Card --- */
-    .location-box {
-      background: rgba(249, 165, 22, 0.05);
-      border: 1px dashed var(--primary);
-      padding: 15px;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .location-box i { color: var(--primary); font-size: 1.2rem; }
-    .location-box span { font-size: 0.8rem; color: #ddd; line-height: 1.4; }
-
-    /* --- Form Elements --- */
-    .form-group { margin-bottom: 20px; }
-    
     label {
-      display: block;
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 0.8rem;
+      font-weight: 600;
       color: var(--primary);
-      margin-bottom: 8px;
+      display: block;
+      margin-bottom: 6px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
 
     input, textarea {
       width: 100%;
-      background: #222;
+      background: rgba(255, 255, 255, 0.05);
       padding: 12px 15px;
-      border: 1px solid #333;
-      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
       color: white;
       font-size: 14px;
       transition: 0.3s;
     }
 
-    input:focus, textarea:focus {
-      border-color: var(--primary);
-      outline: none;
-      background: #2a2a2a;
-    }
-
-    /* --- Disabled Fields Styling --- */
-    input:disabled {
-      background: #111;
-      border-color: #222;
-      color: #555;
+    /* Locked Fields Styling */
+    input:disabled, textarea[readonly] {
+      background: rgba(0, 0, 0, 0.4);
+      border-color: rgba(249, 165, 22, 0.1);
+      color: #999;
       cursor: not-allowed;
+      font-weight: 500;
     }
 
-    .disabled-label {
-      opacity: 0.5;
-      display: flex;
-      justify-content: space-between;
+    .tag-lock {
+        font-size: 9px;
+        background: #332200;
+        color: var(--primary);
+        padding: 3px 8px;
+        border-radius: 4px;
+        margin-left: 8px;
+        vertical-align: middle;
     }
 
-    .coming-soon-tag {
-      font-size: 10px;
-      background: #333;
-      padding: 2px 8px;
-      border-radius: 4px;
-      color: #777;
-    }
-
-    /* --- Submit Button --- */
     .btn {
       width: 100%;
-      padding: 16px;
+      padding: 15px;
       font-size: 16px;
       font-weight: 800;
-      background: var(--primary);
-      color: black;
       border: none;
       border-radius: 12px;
       cursor: pointer;
       transition: 0.3s;
+      background: var(--primary);
+      color: black;
       text-transform: uppercase;
+      letter-spacing: 1px;
       margin-top: 10px;
     }
 
-    .btn:hover:not(:disabled) {
-      background: var(--primary-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(249, 165, 22, 0.3);
-    }
-
-    .btn:disabled {
-      background: #444;
-      cursor: not-allowed;
-      color: #777;
-    }
+    .btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
 
     .message {
       display: none;
       margin-top: 20px;
-      font-weight: 600;
-      color: var(--primary);
+      padding: 12px;
       text-align: center;
+      border-radius: 10px;
+      font-weight: bold;
       background: rgba(249, 165, 22, 0.1);
-      padding: 10px;
-      border-radius: 8px;
+      color: var(--primary);
     }
 
-    footer {
-      padding: 20px;
-      text-align: center;
-      background: #000;
-      font-size: 0.8rem;
-      color: #555;
-    }
+    footer { text-align: center; padding: 20px; color: var(--text-gray); font-size: 0.8rem; }
 
     @media (max-width: 600px) {
-      .form-container { padding: 25px; margin: 10px; }
-      header { flex-direction: column; gap: 10px; }
-      .nav-links a { margin: 0 10px; }
+        header.nav-bar { flex-direction: column; gap: 15px; padding: 20px; }
+        .header-logo { height: 45px; }
     }
   </style>
 </head>
 <body>
 
-  <header>
+  <header class="nav-bar">
     <div class="logo">
-      <h2>ENGINEER'S</h2>
+        <img src="Engineers biriyani.png" alt="Engineer's Biryani Logo" class="header-logo">
     </div>
     <nav class="nav-links">
       <a href="index.html">Home</a>
@@ -236,91 +194,79 @@
     </nav>
   </header>
 
-  <div class="order-wrapper">
+  <section class="order-section">
     <div class="form-container">
-      <h1>Place Order</h1>
-      <p>Fill in the details to engineering your perfect meal.</p>
-
-      <div class="location-box">
-        <i class="fa-solid fa-location-dot"></i>
-        <span>
-          <strong>Delivery/Pickup Hub:</strong><br>
-          Coimbatore Institute of Technology, Avinashi Road, Coimbatore - 641 014.
-        </span>
-      </div>
-
+      <h1>ORDER NOW</h1>
+      
       <form id="form">
         <div class="form-group">
           <label>Full Name</label>
           <input type="text" name="name" placeholder="Enter your name" required />
         </div>
 
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="example@email.com" required />
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" name="phone" placeholder="10-digit mobile number" pattern="\d{10}" required />
+        </div>
+
+        <div class="form-group">
+            <label>Delivery Address <span class="tag-lock"><i class="fas fa-map-marker-alt"></i> FIXED LOCATION</span></label>
+            <textarea name="address" rows="2" readonly>CIT, Avinashi Road, Coimbatore - 641 014, Tamil Nadu</textarea>
+        </div>
+
         <div style="display: flex; gap: 15px;">
-          <div class="form-group" style="flex: 1.5;">
-            <label>Phone Number</label>
-            <input type="tel" name="phone" placeholder="10-digit number" pattern="\d{10}" required />
-          </div>
-          <div class="form-group" style="flex: 1;">
-            <label>Order Date</label>
-            <input type="date" name="date" id="date" required />
-          </div>
+            <div class="form-group" style="flex: 1;">
+              <label>Delivery Date</label>
+              <input type="date" name="date" id="date" required />
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label>Biryani Qty</label>
+              <input type="number" name="quantity" min="1" value="1" required />
+            </div>
         </div>
 
         <div class="form-group">
-          <label>Quantity of Biryani (Rs 99)</label>
-          <input type="number" name="quantity" min="1" value="1" required />
+          <label>Bread Halwa <span class="tag-lock" style="color:#ff4444; background: #221111;">UNAVAILABLE</span></label>
+          <input type="text" value="Coming Soon..." disabled />
         </div>
 
         <div class="form-group">
-          <label class="disabled-label">
-            Chicken Chilli 
-            <span class="coming-soon-tag">Coming Soon</span>
-          </label>
-          <input type="text" name="chilli" placeholder="Currently Unavailable" disabled />
-        </div>
-
-        <div class="form-group">
-          <label class="disabled-label">
-            Bread Halwa 
-            <span class="coming-soon-tag">Coming Soon</span>
-          </label>
-          <input type="text" name="briyani" placeholder="Currently Unavailable" disabled />
+          <label>Chicken Chilli <span class="tag-lock" style="color:#ff4444; background: #221111;">UNAVAILABLE</span></label>
+          <input type="text" value="Coming Soon..." disabled />
         </div>
 
         <div class="form-group">
           <label>Special Instructions</label>
-          <textarea name="feedback" rows="2" placeholder="Any preferences? (e.g., extra spicy)"></textarea>
+          <textarea name="feedback" rows="2" placeholder="e.g., Less spicy, more onions..."></textarea>
         </div>
 
-        <input type="hidden" name="email" value="customer@cit.edu.in">
-
-        <button class="btn" type="submit" id="submit-button">Confirm Order</button>
+        <button class="btn" type="submit" id="submit-button">Place Order</button>
       </form>
 
-      <div id="message" class="message">Processing...</div>
+      <div id="message" class="message">Processing your order...</div>
     </div>
-  </div>
+  </section>
 
-  <footer>
-    © 2025 Engineers Biryani | Handcrafted with Precision
-  </footer>
+  <footer>&copy; 2025 Engineer Biryani. All rights reserved.</footer>
 
   <script>
-    // Set min date to today for the date picker
     document.addEventListener("DOMContentLoaded", function () {
       const today = new Date().toISOString().split("T")[0];
       document.getElementById("date").setAttribute("min", today);
-      document.getElementById("date").value = today;
     });
 
     document.getElementById("form").addEventListener("submit", function (e) {
       e.preventDefault();
-
+      const messageDiv = document.getElementById("message");
       const submitBtn = document.getElementById("submit-button");
-      const msgDiv = document.getElementById("message");
 
-      msgDiv.textContent = "Connecting to Server...";
-      msgDiv.style.display = "block";
+      messageDiv.textContent = "Processing your order...";
+      messageDiv.style.display = "block";
       submitBtn.disabled = true;
 
       const formData = new FormData(this);
@@ -329,26 +275,21 @@
       fetch("https://script.google.com/macros/s/AKfycbxzwOxGx-cuK6vHO4nZzWYFZ2GN1v_435zPHwdi6fLJlAKIoSOY_0HabveYswhcBAwE1w/exec", {
         method: "POST",
         body: formDataString,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
       })
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
-          msgDiv.textContent = "Order Placed Successfully!";
-          msgDiv.style.color = "#f9a516";
-          this.reset();
+          messageDiv.textContent = "🎉 Order placed successfully!";
+          document.getElementById("form").reset();
         } else {
-          msgDiv.textContent = "Error: " + (data.message || "Submission failed.");
-          msgDiv.style.color = "#ff4444";
+          messageDiv.textContent = data.message || "Error submitting form.";
         }
         submitBtn.disabled = false;
-        setTimeout(() => (msgDiv.style.display = "none"), 5000);
+        setTimeout(() => (messageDiv.style.display = "none"), 5000);
       })
-      .catch((error) => {
-        msgDiv.textContent = "Network Error. Please try again.";
-        msgDiv.style.color = "#ff4444";
+      .catch(() => {
+        messageDiv.textContent = "An error occurred while submitting.";
         submitBtn.disabled = false;
       });
     });
