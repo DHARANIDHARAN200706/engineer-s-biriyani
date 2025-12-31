@@ -49,7 +49,7 @@
     }
 
     .header-logo {
-      height: 55px; /* Adjust height as needed based on your actual logo file */
+      height: 55px;
       width: auto;
       display: block;
       transition: 0.3s;
@@ -125,8 +125,8 @@
       transition: 0.3s;
     }
 
-    /* Locked Fields Styling */
-    input:disabled, textarea[readonly] {
+    /* Fixed/Locked Fields Styling */
+    input[readonly], textarea[readonly], input:disabled {
       background: rgba(0, 0, 0, 0.4);
       border-color: rgba(249, 165, 22, 0.1);
       color: #999;
@@ -221,8 +221,8 @@
 
         <div style="display: flex; gap: 15px;">
             <div class="form-group" style="flex: 1;">
-              <label>Delivery Date</label>
-              <input type="date" name="date" id="date" required />
+              <label>Delivery Date <span class="tag-lock">SUNDAY ONLY</span></label>
+              <input type="date" name="date" id="date" readonly required />
             </div>
             <div class="form-group" style="flex: 1;">
               <label>Biryani Qty</label>
@@ -256,8 +256,26 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const today = new Date().toISOString().split("T")[0];
-      document.getElementById("date").setAttribute("min", today);
+      const dateInput = document.getElementById("date");
+      const today = new Date();
+
+      // Calculate the upcoming Sunday
+      let nextSunday = new Date();
+      const dayOfWeek = today.getDay(); // 0 (Sun) to 6 (Sat)
+      
+      // logic: Find how many days to add to get to Sunday (0)
+      // If today is Sunday, we move to the next Sunday (+7 days)
+      const daysUntilSunday = (7 - dayOfWeek) % 7 || 7; 
+      
+      nextSunday.setDate(today.getDate() + daysUntilSunday);
+
+      // Format to YYYY-MM-DD
+      const yyyy = nextSunday.getFullYear();
+      const mm = String(nextSunday.getMonth() + 1).padStart(2, '0');
+      const dd = String(nextSunday.getDate()).padStart(2, '0');
+      
+      // Set the fixed value
+      dateInput.value = `${yyyy}-${mm}-${dd}`;
     });
 
     document.getElementById("form").addEventListener("submit", function (e) {
@@ -282,11 +300,12 @@
         if (data.status === "success") {
           messageDiv.textContent = "🎉 Order placed successfully!";
           document.getElementById("form").reset();
+          // Reload to ensure the fixed Sunday date is recalculated/reapplied
+          setTimeout(() => window.location.reload(), 3000);
         } else {
           messageDiv.textContent = data.message || "Error submitting form.";
+          submitBtn.disabled = false;
         }
-        submitBtn.disabled = false;
-        setTimeout(() => (messageDiv.style.display = "none"), 5000);
       })
       .catch(() => {
         messageDiv.textContent = "An error occurred while submitting.";
