@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ENGINEER'S BIRIYANI | The Taste of Tradition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
   <style>
     :root {
@@ -20,10 +21,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
     body { background-color: var(--bg-dark); color: white; overflow-x: hidden; line-height: 1.6; }
 
-    /* --- BIRTHDAY CANVAS --- */
-    #birthday-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10001; }
-
-    /* --- JANAYAGAN POPUP (CENTER) --- */
+    /* --- JANAYAGAN POPUP --- */
     .movie-modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center;
@@ -37,28 +35,33 @@
     .close-popup { position: absolute; top: 5px; right: 15px; font-size: 32px; font-weight: 300; color: #999; cursor: pointer; }
     .movie-modal-content img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
 
-    /* --- MINI FLOATING ICON (BOTTOM) --- */
+    /* --- MINI FLOATING ICON --- */
     .mini-movie-icon {
-      position: fixed; bottom: -100px; left: 30px; background: white; color: black;
-      padding: 10px 20px; border-radius: 50px; display: flex; align-items: center; gap: 12px;
+      position: fixed; bottom: -100px; left: 20px; background: white; color: black;
+      padding: 10px 15px; border-radius: 50px; display: flex; align-items: center; gap: 10px;
       box-shadow: 0 10px 30px rgba(249, 165, 22, 0.6); border: 2px solid var(--primary);
       z-index: 9000; transition: bottom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      text-decoration: none; font-weight: 700; font-size: 13px;
+      text-decoration: none; font-weight: 700; font-size: 11px;
     }
-    .mini-movie-icon img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
-    .mini-movie-icon.active { bottom: 30px; animation: float-breathing 3s infinite ease-in-out; }
+    .mini-movie-icon img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+    .mini-movie-icon.active { bottom: 20px; animation: float-breathing 3s infinite ease-in-out; }
     @keyframes float-breathing { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-    /* --- Navigation & Special Offer --- */
+    /* --- Navigation --- */
     header {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 15px 5%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
+      padding: 10px 5%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
       position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(249, 165, 22, 0.3);
     }
-    .header-logo { height: 50px; }
+    .header-logo { height: 45px; }
+    
     .nav-links { display: flex; align-items: center; }
-    .nav-links a { margin-left: 25px; text-decoration: none; color: white; font-weight: 600; font-size: 13px; text-transform: uppercase; }
+    .nav-links a { margin-left: 25px; text-decoration: none; color: white; font-weight: 600; font-size: 13px; text-transform: uppercase; transition: 0.3s; }
+    .nav-links a:hover { color: var(--primary); }
 
+    .menu-toggle { display: none; font-size: 24px; color: var(--primary); cursor: pointer; }
+
+    /* --- Special Offer Button --- */
     .offer-wrapper { position: relative; margin-left: 25px; }
     .special-offer-btn {
       background: var(--primary); color: black; padding: 8px 16px; border-radius: 4px;
@@ -67,37 +70,76 @@
     .offer-info-box {
       display: none; position: absolute; top: 45px; right: 0; background: white;
       color: black; width: 280px; padding: 20px; border-radius: 12px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.5); text-align: left;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5); text-align: left; z-index: 100;
     }
     .offer-wrapper:hover .offer-info-box { display: block; }
     .offer-info-box h4 { color: var(--primary); margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-    .terms-text { font-size: 11px; line-height: 1.4; color: #444; margin-top: 10px; }
 
-    /* --- Hero & Grid --- */
-    .hero { display: flex; align-items: center; justify-content: space-between; padding: 60px 8%; min-height: 70vh; gap: 30px; max-width: 1400px; margin: 0 auto; }
-    .hero-image img { width: 100%; max-width: 450px; filter: drop-shadow(0 0 30px rgba(249, 165, 22, 0.4)); animation: spin-slow 20s linear infinite; }
+    /* --- Hero Section --- */
+    .hero { 
+      display: flex; align-items: center; justify-content: space-between; 
+      padding: 40px 8%; min-height: 80vh; gap: 40px; max-width: 1400px; margin: 0 auto; 
+    }
+    .hero-content { flex: 1; }
+    .hero-image { flex: 1; display: flex; justify-content: center; }
+    .hero-image img { width: 100%; max-width: 450px; filter: drop-shadow(0 0 30px rgba(249, 165, 22, 0.4)); animation: spin-slow 25s linear infinite; }
     @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-    .section-container { padding: 80px 5%; text-align: center; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 350px)); gap: 40px; margin-top: 50px; justify-content: center; }
-    .card { background: var(--card-bg); border-radius: 25px; padding: 30px; border: 1px solid rgba(255,255,255,0.05); text-align: center; }
+    /* --- Menu Section --- */
+    .section-container { padding: 60px 5%; text-align: center; }
+    .grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 30px; margin-top: 40px; justify-content: center; 
+    }
+    .card { background: var(--card-bg); border-radius: 25px; padding: 25px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+    .card:hover { transform: translateY(-10px); border-color: var(--primary); }
     .card img { width: 100%; height: 220px; object-fit: cover; border-radius: 20px; margin-bottom: 20px; }
     
     .price-tag { margin-bottom: 10px; }
-    .old-price { color: var(--text-gray); text-decoration: line-through; font-size: 1.2rem; margin-right: 10px; }
-    .new-price { color: var(--primary); font-size: 1.8rem; font-weight: 800; }
-    .special-offer-badge { color: var(--primary); font-weight: 800; font-size: 0.85rem; display: block; margin-bottom: 15px; letter-spacing: 1px; }
+    .old-price { color: var(--text-gray); text-decoration: line-through; font-size: 1rem; margin-right: 10px; }
+    .new-price { color: var(--primary); font-size: 1.6rem; font-weight: 800; }
+    .special-offer-badge { color: var(--primary); font-weight: 800; font-size: 0.75rem; display: block; margin-bottom: 15px; letter-spacing: 1px; }
     
-    .btn { background: var(--primary); color: black; padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: 800; display: inline-block; transition: 0.3s; }
+    .btn { background: var(--primary); color: black; padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: 800; display: inline-block; transition: 0.3s; border: none; cursor: pointer; }
     .btn:hover { background: var(--primary-hover); transform: scale(1.05); }
-    footer { padding: 60px 5%; background: var(--primary); color: black; text-align: center; }
+    
+    footer { padding: 40px 5%; background: var(--primary); color: black; text-align: center; margin-top: 50px; }
 
-    @media (max-width: 768px) { .hero { flex-direction: column-reverse; text-align: center; } .nav-links { display: none; } }
+    /* --- RESPONSIVE DESIGN --- */
+    @media (max-width: 992px) {
+      .hero { flex-direction: column-reverse; text-align: center; padding-top: 20px; }
+      .hero-content h1 { font-size: 3rem !important; }
+      .hero-image img { max-width: 300px; }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      
+      .nav-links {
+        position: fixed; top: 70px; right: -100%; width: 100%; height: calc(100vh - 70px);
+        background: rgba(0,0,0,0.95); flex-direction: column; align-items: center; 
+        padding-top: 50px; transition: 0.4s;
+      }
+      .nav-links.active { right: 0; }
+      .nav-links a { margin: 15px 0; font-size: 18px; }
+      
+      .offer-wrapper { margin-left: 0; margin-top: 20px; }
+      .offer-info-box { right: -50px; width: 260px; }
+
+      .hero-content h1 { font-size: 2.5rem !important; }
+      .section-container h2 { font-size: 2rem !important; }
+    }
+
+    @media (max-width: 480px) {
+      .mini-movie-icon span { display: none; } /* Hide text on very small screens, show only icon */
+      .mini-movie-icon { padding: 10px; }
+    }
   </style>
 </head>
 <body>
 
-  <canvas id="birthday-canvas"></canvas>
+  <canvas id="birthday-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10001;"></canvas>
 
   <div id="movieOverlay" class="movie-modal-overlay">
     <div class="movie-modal-content">
@@ -115,7 +157,12 @@
 
   <header>
     <img src="Engineers biriyani.png" alt="Logo" class="header-logo">
-    <nav class="nav-links">
+    
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <nav class="nav-links" id="nav-menu">
       <a href="index.html">HOME</a>
       <a href="order.html">ORDER</a>
       <a href="ABOUT.html">ABOUT</a>
@@ -124,12 +171,12 @@
         <div class="offer-info-box">
           <h4>TICKET OFFER</h4>
           <p style="font-weight: 800; font-size: 14px;">Win ₹180 Movie Tickets!</p>
-          <div class="terms-text">
+          <div style="font-size: 11px; line-height: 1.4; color: #444; margin-top: 10px;">
             <strong>Terms & Conditions:</strong><br>
-            1) Take a selfie with our pack or a pic of the pack.<br>
-            2) Put it on your Story and tag our Insta ID.<br>
-            3) We will select one winner from the entries.<br>
-            4) The ticket offer value is ₹180.
+            1) Take a selfie with our pack.<br>
+            2) Post on Story and tag our Insta ID.<br>
+            3) One lucky winner selected weekly.<br>
+            4) Ticket value capped at ₹180.
           </div>
           <a href="order.html" style="color:var(--primary); font-size: 11px; font-weight: 800; text-decoration: none; display: block; margin-top: 10px;">ORDER NOW TO ENTER</a>
         </div>
@@ -139,9 +186,9 @@
 
   <section class="hero">
     <div class="hero-content">
-      <h4 style="color:var(--primary); letter-spacing:4px;">ENGINEERED FLAVORS</h4>
-      <h1 style="font-family:'Playfair Display'; font-size: clamp(2.5rem, 5vw, 4.5rem);">THE TASTE OF <span style="color:var(--primary)">TRADITION</span></h1>
-      <p style="color:var(--text-gray); margin: 20px 0 30px 0; max-width: 500px;">Experience biryani where every spice is precisely measured for the ultimate taste profile.</p>
+      <h4 style="color:var(--primary); letter-spacing:4px; font-size: 0.8rem;">ENGINEERED FLAVORS</h4>
+      <h1 style="font-family:'Playfair Display'; font-size: 4.5rem; line-height: 1.1;">THE TASTE OF <br><span style="color:var(--primary)">TRADITION</span></h1>
+      <p style="color:var(--text-gray); margin: 20px 0 30px 0; max-width: 500px; font-size: 0.95rem;">Experience biryani where every spice is precisely measured for the ultimate taste profile. Tradition meets precision.</p>
       <a href="#menu" class="btn">EXPLORE MENU</a>
     </div>
     <div class="hero-image">
@@ -152,7 +199,6 @@
   <section class="section-container" id="menu">
     <h2 style="font-family: 'Playfair Display'; font-size: 2.8rem;">POPULAR SPECIALS</h2>
     <div class="grid">
-      
       <div class="card">
         <img src="Gemini_Generated_Image_j30lesj30lesj30l.png" alt="Chicken Biryani">
         <h3>CHICKEN BIRIYANI</h3>
@@ -163,18 +209,28 @@
         <span class="special-offer-badge">★ SPECIAL OFFER ★</span>
         <a href="order.html" class="btn" style="padding: 10px 25px; font-size: 0.85rem;">ORDER NOW</a>
       </div>
-      </div>
+    </div>
   </section>
 
   <footer>
-    <p style="font-weight: 800;">© 2025 ENGINEERS BIRIYANI. ALL RIGHTS RESERVED.</p>
+    <p style="font-weight: 800; font-size: 0.8rem;">© 2025 ENGINEERS BIRIYANI. ALL RIGHTS RESERVED.</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('mobile-menu');
+    const navMenu = document.getElementById('nav-menu');
+
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      menuToggle.querySelector('i').classList.toggle('fa-bars');
+      menuToggle.querySelector('i').classList.toggle('fa-times');
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Birthday Confetti
-      const duration = 4 * 1000;
+      const duration = 3 * 1000;
       const animationEnd = Date.now() + duration;
       const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 11000 };
       const interval = setInterval(function() {
@@ -195,7 +251,7 @@
         miniIcon.classList.add('active');
       }
 
-      const autoTimer = setTimeout(showMiniIcon, 6000);
+      const autoTimer = setTimeout(showMiniIcon, 5000);
       closeBtn.addEventListener('click', () => {
         clearTimeout(autoTimer);
         showMiniIcon();
@@ -205,4 +261,3 @@
 
 </body>
 </html>
-
