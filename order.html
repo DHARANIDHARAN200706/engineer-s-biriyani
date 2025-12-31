@@ -230,12 +230,12 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
           <label>Bread Halwa <span class="tag-lock" style="color:#ff4444; background: #221111;">UNAVAILABLE</span></label>
           <input type="text" value="Coming Soon..." disabled />
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
           <label>Chicken Chilli <span class="tag-lock" style="color:#ff4444; background: #221111;">UNAVAILABLE</span></label>
           <input type="text" value="Coming Soon..." disabled />
         </div>
@@ -259,22 +259,16 @@
       const dateInput = document.getElementById("date");
       const today = new Date();
 
-      // Calculate the upcoming Sunday
       let nextSunday = new Date();
-      const dayOfWeek = today.getDay(); // 0 (Sun) to 6 (Sat)
-      
-      // logic: Find how many days to add to get to Sunday (0)
-      // If today is Sunday, we move to the next Sunday (+7 days)
-      const daysUntilSunday = (7 - dayOfWeek) % 7 || 7; 
+      const dayOfWeek = today.getDay(); 
+      const daysUntilSunday = (7 - dayOfWeek) % 7 || 7;  
       
       nextSunday.setDate(today.getDate() + daysUntilSunday);
 
-      // Format to YYYY-MM-DD
       const yyyy = nextSunday.getFullYear();
       const mm = String(nextSunday.getMonth() + 1).padStart(2, '0');
       const dd = String(nextSunday.getDate()).padStart(2, '0');
       
-      // Set the fixed value
       dateInput.value = `${yyyy}-${mm}-${dd}`;
     });
 
@@ -300,7 +294,6 @@
         if (data.status === "success") {
           messageDiv.textContent = "🎉 Order placed successfully!";
           document.getElementById("form").reset();
-          // Reload to ensure the fixed Sunday date is recalculated/reapplied
           setTimeout(() => window.location.reload(), 3000);
         } else {
           messageDiv.textContent = data.message || "Error submitting form.";
