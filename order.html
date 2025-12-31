@@ -20,12 +20,7 @@
       --whatsapp-green: #25D366;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
     body {
       background-color: var(--bg-dark);
@@ -37,26 +32,12 @@
 
     /* --- MINI FLOATING ICON --- */
     .mini-movie-icon {
-      position: fixed;
-      bottom: 25px;
-      left: 20px;
-      background: white;
-      color: black;
-      padding: 10px 20px;
-      border-radius: 50px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 10px 30px rgba(249, 165, 22, 0.6);
-      border: 2px solid var(--primary);
-      z-index: 9000;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 13px;
-      animation: float-breathing 3s infinite ease-in-out;
-      transition: 0.3s;
+      position: fixed; bottom: 25px; left: 20px; background: white; color: black;
+      padding: 10px 20px; border-radius: 50px; display: flex; align-items: center;
+      gap: 12px; box-shadow: 0 10px 30px rgba(249, 165, 22, 0.6);
+      border: 2px solid var(--primary); z-index: 9000; text-decoration: none;
+      font-weight: 700; font-size: 13px; animation: float-breathing 3s infinite ease-in-out;
     }
-
     .mini-movie-icon img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
 
     @keyframes float-breathing {
@@ -66,135 +47,80 @@
 
     /* --- Navigation --- */
     header.nav-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 5%;
-      background: rgba(0,0,0,0.95);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(249, 165, 22, 0.2);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 5%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
+      position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(249, 165, 22, 0.2);
     }
+    .header-logo { height: 50px; width: auto; }
+    .nav-links a { margin-left: 20px; text-decoration: none; color: white; font-weight: 600; font-size: 13px; text-transform: uppercase; }
 
-    .header-logo { height: 55px; width: auto; }
-
-    .nav-links a {
-      margin-left: 20px;
-      text-decoration: none;
-      color: white;
-      font-weight: 600;
-      font-size: 13px;
-      text-transform: uppercase;
-    }
-
-    /* --- Form & Success Container --- */
+    /* --- Form Container --- */
     .order-section {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 40px 20px;
+      flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 20px;
     }
-
     .form-container {
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 40px;
-      border-radius: 24px;
-      width: 100%;
-      max-width: 500px;
-      position: relative;
+      background: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 30px; border-radius: 24px; width: 100%; max-width: 500px;
     }
 
+    /* --- Terms & Conditions Section --- */
+    .tc-wrapper { margin-bottom: 25px; }
+    .tc-toggle-btn {
+      width: 100%; background: rgba(249, 165, 22, 0.1); color: var(--primary);
+      border: 1px dashed var(--primary); padding: 12px; font-size: 12px;
+      font-weight: 800; cursor: pointer; border-radius: 12px;
+      display: flex; justify-content: space-between; align-items: center; transition: 0.3s;
+    }
+    #tc-content {
+      display: none; background: rgba(255,255,255,0.03); padding: 15px;
+      border-radius: 0 0 12px 12px; border: 1px solid rgba(249, 165, 22, 0.2); border-top: none;
+    }
+    .tc-list { list-style: none; font-size: 0.8rem; color: var(--text-gray); line-height: 1.6; }
+    .tc-list li { margin-bottom: 8px; }
+    .tc-list i { color: var(--primary); margin-right: 8px; }
+
+    /* --- Form Styling --- */
     .form-container h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: var(--primary);
-      margin-bottom: 20px;
-      text-align: center;
+      font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary);
+      margin-bottom: 20px; text-align: center;
     }
-
-    .form-group { margin-bottom: 18px; }
-    label { font-size: 0.8rem; font-weight: 600; color: var(--primary); display: block; margin-bottom: 6px; text-transform: uppercase; }
-
+    .form-group { margin-bottom: 15px; }
+    label { font-size: 0.75rem; font-weight: 600; color: var(--primary); display: block; margin-bottom: 6px; text-transform: uppercase; }
     input, textarea {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 12px 15px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      color: white;
-      font-size: 14px;
+      width: 100%; background: rgba(255, 255, 255, 0.05); padding: 12px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; font-size: 14px;
     }
-
     input[readonly], textarea[readonly] { background: rgba(0, 0, 0, 0.4); color: #999; cursor: not-allowed; }
-
-    .tag-lock { font-size: 9px; background: #332200; color: var(--primary); padding: 3px 8px; border-radius: 4px; margin-left: 8px; }
+    .tag-lock { font-size: 9px; background: #332200; color: var(--primary); padding: 3px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
 
     .btn {
-      width: 100%;
-      padding: 15px;
-      font-size: 16px;
-      font-weight: 800;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      background: var(--primary);
-      color: black;
-      text-transform: uppercase;
-      margin-top: 10px;
+      width: 100%; padding: 15px; font-size: 16px; font-weight: 800; border: none;
+      border-radius: 12px; cursor: pointer; background: var(--primary); color: black;
+      text-transform: uppercase; margin-top: 10px; transition: 0.3s;
     }
 
-    /* --- WhatsApp Success State (Hidden by default) --- */
-    #success-state {
-      display: none;
-      text-align: center;
-      animation: fadeInUp 0.6s ease forwards;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .success-icon {
-      font-size: 4rem;
-      color: var(--whatsapp-green);
-      margin-bottom: 20px;
-    }
-
+    /* --- Success State --- */
+    #success-state { display: none; text-align: center; animation: fadeInUp 0.6s ease forwards; }
+    .success-icon { font-size: 3.5rem; color: var(--whatsapp-green); margin-bottom: 15px; }
     .whatsapp-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: var(--whatsapp-green);
-      color: white;
-      text-decoration: none;
-      padding: 18px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 1.1rem;
-      margin-top: 25px;
-      transition: 0.3s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--whatsapp-green); color: white; text-decoration: none;
+      padding: 15px; border-radius: 12px; font-weight: 800; margin-top: 20px; transition: 0.3s;
     }
-
-    .whatsapp-btn:hover { background: #1da851; transform: scale(1.02); }
 
     .message {
-      display: none;
-      margin-top: 20px;
-      padding: 12px;
-      text-align: center;
-      border-radius: 10px;
-      font-weight: bold;
-      background: rgba(249, 165, 22, 0.1);
-      color: var(--primary);
+      display: none; margin-top: 20px; padding: 12px; text-align: center;
+      border-radius: 10px; font-weight: bold; background: rgba(249, 165, 22, 0.1); color: var(--primary);
     }
 
     footer { text-align: center; padding: 20px; color: var(--text-gray); font-size: 0.8rem; }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 600px) {
+      .nav-links a { margin-left: 12px; font-size: 11px; }
+      .mini-movie-icon span { display: none; }
+      .flex-mobile { flex-direction: column; gap: 0 !important; }
+    }
   </style>
 </head>
 <body>
@@ -219,7 +145,23 @@
     <div class="form-container">
       
       <div id="order-form-wrapper">
-        <h1 id="form-title">ORDER NOW</h1>
+        <div class="tc-wrapper">
+          <button type="button" class="tc-toggle-btn" onclick="toggleTC()">
+            <span><i class="fas fa-ticket-alt"></i> MOVIE TICKET TERMS & CONDITIONS</span>
+            <i class="fas fa-chevron-down" id="tc-chevron"></i>
+          </button>
+          <div id="tc-content">
+            <ul class="tc-list">
+              <li><i class="fas fa-camera"></i> 1) Take a selfie with our pack or a pic of the pack.</li>
+              <li><i class="fas fa-share-square"></i> 2) Put it on your Story and tag our Insta ID.</li>
+              <li><i class="fas fa-trophy"></i> 3) We will select one winner from the entries.</li>
+              <li><i class="fas fa-rupee-sign"></i> 4) The ticket offer value is ₹180.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h1>ORDER NOW</h1>
+        
         <form id="form">
           <div class="form-group">
             <label>Full Name</label>
@@ -237,13 +179,13 @@
           </div>
 
           <div class="form-group">
-              <label>Delivery Address <span class="tag-lock"><i class="fas fa-map-marker-alt"></i> FIXED LOCATION</span></label>
+              <label>Delivery Address <span class="tag-lock"><i class="fas fa-map-marker-alt"></i> FIXED</span></label>
               <textarea name="address" rows="2" readonly>CIT, Avinashi Road, Coimbatore - 641 014, Tamil Nadu</textarea>
           </div>
 
-          <div style="display: flex; gap: 15px;">
+          <div style="display: flex; gap: 15px;" class="flex-mobile">
               <div class="form-group" style="flex: 1;">
-                <label>Delivery Date <span class="tag-lock">SUNDAY ONLY</span></label>
+                <label>Date <span class="tag-lock">SUNDAY ONLY</span></label>
                 <input type="date" name="date" id="date" readonly required />
               </div>
               <div class="form-group" style="flex: 1;">
@@ -254,7 +196,7 @@
 
           <div class="form-group">
             <label>Special Instructions</label>
-            <textarea name="feedback" rows="2" placeholder="e.g., Less spicy, more onions..."></textarea>
+            <textarea name="feedback" rows="2" placeholder="e.g., Less spicy..."></textarea>
           </div>
 
           <button class="btn" type="submit" id="submit-button">Place Order</button>
@@ -263,16 +205,15 @@
 
       <div id="success-state">
         <div class="success-icon"><i class="fas fa-check-circle"></i></div>
-        <h1 style="color: white;">Order Confirmed!</h1>
-        <p style="color: var(--text-gray); line-height: 1.6; margin-top: 10px;">
-          Your delicious biryani is being processed. Join our WhatsApp group for exclusive updates!
-        </p>
+        <h2 style="color: white; margin-bottom: 10px;">Order Confirmed!</h2>
+        <p style="color: var(--text-gray); font-size: 0.9rem;">Join our community for delivery updates!</p>
         
         <a href="https://chat.whatsapp.com/JNFGE4Hsmv96bLYHKO78hc" target="_blank" class="whatsapp-btn">
           <i class="fab fa-whatsapp"></i> JOIN WHATSAPP GROUP
         </a>
-
-             </div>
+        
+        <p style="margin-top: 30px; font-size: 0.7rem; color: var(--disabled-text);">Redirecting to home in 15 seconds...</p>
+      </div>
 
       <div id="message" class="message">Processing your order...</div>
     </div>
@@ -281,20 +222,26 @@
   <footer>&copy; 2025 Engineer Biryani. All rights reserved.</footer>
 
   <script>
+    // Toggle Terms and Conditions
+    function toggleTC() {
+      const content = document.getElementById("tc-content");
+      const chevron = document.getElementById("tc-chevron");
+      if (content.style.display === "block") {
+        content.style.display = "none";
+        chevron.style.transform = "rotate(0deg)";
+      } else {
+        content.style.display = "block";
+        chevron.style.transform = "rotate(180deg)";
+      }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
-      // Calculate next Sunday automatically
       const dateInput = document.getElementById("date");
       const today = new Date();
       let nextSunday = new Date();
-      const dayOfWeek = today.getDay(); 
-      const daysUntilSunday = (7 - dayOfWeek) % 7 || 7;  
-      
+      const daysUntilSunday = (7 - today.getDay()) % 7 || 7;  
       nextSunday.setDate(today.getDate() + daysUntilSunday);
-      const yyyy = nextSunday.getFullYear();
-      const mm = String(nextSunday.getMonth() + 1).padStart(2, '0');
-      const dd = String(nextSunday.getDate()).padStart(2, '0');
-      
-      dateInput.value = `${yyyy}-${mm}-${dd}`;
+      dateInput.value = nextSunday.toISOString().split('T')[0];
     });
 
     document.getElementById("form").addEventListener("submit", function (e) {
@@ -319,14 +266,9 @@
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
-          // Hide Form and Message
           formWrapper.style.display = "none";
           messageDiv.style.display = "none";
-          
-          // Show Success/WhatsApp Container
           successState.style.display = "block";
-          
-          // Redirect to home after 15 seconds
           setTimeout(() => window.location.href = "index.html", 15000);
         } else {
           messageDiv.textContent = data.message || "Error submitting form.";
