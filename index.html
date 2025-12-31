@@ -23,37 +23,45 @@
 
     /* --- Navigation --- */
     header {
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex; flex-direction: column; align-items: center;
       padding: 10px 5%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
       position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(249, 165, 22, 0.3);
     }
-    .header-logo { height: 40px; transition: 0.3s; }
-    
-    .header-right { display: flex; align-items: center; gap: 10px; }
 
-    .nav-links { display: flex; align-items: center; }
+    .header-top { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+    .header-logo { height: 35px; }
+    
+    /* Nav links: Always visible, no hamburger */
+    .nav-links { display: flex; align-items: center; gap: 15px; margin-top: 5px; }
     .nav-links a { 
-      margin-left: 20px; text-decoration: none; color: white; 
-      font-weight: 600; font-size: 13px; text-transform: uppercase; 
+      text-decoration: none; color: white; 
+      font-weight: 600; font-size: 11px; text-transform: uppercase; 
       transition: 0.3s; letter-spacing: 1px;
     }
     .nav-links a:hover { color: var(--primary); }
 
-    .menu-toggle { display: none; font-size: 22px; color: var(--primary); cursor: pointer; padding: 5px; }
-
     /* --- Special Offer Button --- */
     .offer-wrapper { position: relative; }
     .special-offer-btn {
-      background: var(--primary); color: black; padding: 6px 12px; border-radius: 4px;
+      background: var(--primary); color: black; padding: 5px 10px; border-radius: 4px;
       font-weight: 800; font-size: 10px; cursor: pointer; border: none; white-space: nowrap;
     }
-
     .offer-info-box {
-      display: none; position: absolute; top: 45px; right: 0; background: white;
-      color: black; width: 260px; padding: 15px; border-radius: 12px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.5); text-align: left; z-index: 100;
+      display: none; position: absolute; top: 35px; right: 0; background: white;
+      color: black; width: 250px; padding: 15px; border-radius: 12px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5); text-align: left; z-index: 1100;
     }
     .offer-wrapper:hover .offer-info-box { display: block; }
+
+    /* --- Desktop Adjustments (Laptop view) --- */
+    @media (min-width: 768px) {
+      header { flex-direction: row; justify-content: space-between; padding: 10px 8%; }
+      .header-top { width: auto; margin-bottom: 0; }
+      .header-logo { height: 45px; }
+      .nav-links { margin-top: 0; gap: 30px; }
+      .nav-links a { font-size: 13px; }
+      .header-right { display: flex; align-items: center; gap: 25px; }
+    }
 
     /* --- Hero Section --- */
     .hero { 
@@ -62,7 +70,7 @@
       max-width: 1400px; margin: 0 auto; 
     }
     .hero-content { flex: 1.2; }
-    .hero-image { flex: 0.8; display: flex; justify-content: center; align-items: center; }
+    .hero-image { flex: 0.8; display: flex; justify-content: center; }
     .hero-image img { 
       width: 100%; max-width: 450px; 
       filter: drop-shadow(0 0 30px rgba(249, 165, 22, 0.3)); 
@@ -70,7 +78,7 @@
     }
     @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-    /* --- JANAYAGAN POPUP --- */
+    /* --- Movie Popup --- */
     .movie-modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center;
@@ -81,61 +89,30 @@
       text-align: center; max-width: 380px; width: 90%; color: black; position: relative;
     }
     .close-popup { position: absolute; top: 10px; right: 15px; font-size: 28px; color: #999; cursor: pointer; }
-    .movie-modal-content img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
 
     .mini-movie-icon {
       position: fixed; bottom: -100px; left: 20px; background: white; color: black;
-      padding: 10px 15px; border-radius: 50px; display: flex; align-items: center; gap: 10px;
+      padding: 10px 18px; border-radius: 50px; display: flex; align-items: center; gap: 12px;
       z-index: 9000; transition: 0.8s; text-decoration: none; font-weight: 700; font-size: 11px;
       border: 2px solid var(--primary);
     }
     .mini-movie-icon.active { bottom: 20px; }
     .mini-movie-icon img { width: 30px; height: 30px; border-radius: 50%; }
 
-    /* --- Sections & Cards --- */
+    /* --- Menu Section --- */
     .section-container { padding: 60px 5%; text-align: center; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; justify-items: center; }
-    
-    .card { 
-      background: var(--card-bg); border-radius: 25px; padding: 25px; 
-      border: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
-      max-width: 350px; width: 100%;
-    }
-    .card:hover { transform: translateY(-10px); border-color: var(--primary); }
-    .new-price { color: var(--primary); font-size: 1.5rem; font-weight: 800; }
-    .btn { 
-      background: var(--primary); color: black; padding: 12px 30px; 
-      border-radius: 50px; text-decoration: none; font-weight: 800; 
-      display: inline-block; transition: 0.3s; width: 100%;
-    }
+    .grid { display: flex; justify-content: center; margin-top: 40px; }
+    .card { background: var(--card-bg); border-radius: 25px; padding: 25px; border: 1px solid rgba(255,255,255,0.05); max-width: 350px; width: 100%; }
+    .btn { background: var(--primary); color: black; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 800; display: inline-block; transition: 0.3s; }
 
     footer { padding: 40px 5%; background: var(--primary); color: black; text-align: center; font-weight: 800; font-size: 0.8rem; }
 
-    /* --- RESPONSIVE FIXES --- */
-    @media (max-width: 992px) {
-      .hero { flex-direction: column-reverse; text-align: center; padding: 40px 5%; }
-      .hero-content h1 { font-size: 3rem; }
-      .hero-image img { max-width: 300px; }
-    }
-
+    /* Mobile Hero Fixes */
     @media (max-width: 768px) {
-      .menu-toggle { display: block; }
-      .nav-links {
-        position: fixed; top: 60px; right: -100%; width: 80%; height: calc(100vh - 60px);
-        background: #0a0a0a; flex-direction: column; padding-top: 50px; transition: 0.4s;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-      }
-      .nav-links.active { right: 0; }
-      .nav-links a { margin: 15px 0; font-size: 16px; margin-left: 0; }
-      
-      .hero-content h1 { font-size: 2.5rem; }
-      .mini-movie-icon span { display: none; } /* Hide text on small mobile, show icon only */
-    }
-
-    @media (max-width: 480px) {
-      header { padding: 10px 3%; }
-      .offer-info-box { width: 220px; right: -40px; }
-      .card { padding: 15px; }
+      .hero { flex-direction: column-reverse; text-align: center; padding: 40px 5%; }
+      .hero-content h1 { font-size: 2.5rem !important; }
+      .hero-image img { max-width: 280px; }
+      .mini-movie-icon span { display: none; }
     }
   </style>
 </head>
@@ -144,33 +121,24 @@
   <canvas id="birthday-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10001;"></canvas>
 
   <header>
-    <a href="index.html"><img src="Engineers biriyani.png" alt="Logo" class="header-logo"></a>
-    
-    <div class="header-right">
+    <div class="header-top">
+      <a href="index.html"><img src="Engineers biriyani.png" alt="Logo" class="header-logo"></a>
+      
       <div class="offer-wrapper">
         <button class="special-offer-btn">SPECIAL OFFER</button>
         <div class="offer-info-box">
           <h4 style="color:var(--primary); font-size: 14px; margin-bottom: 5px;">TICKET OFFER</h4>
           <p style="font-weight: 800; font-size: 12px;">Win ₹180 Movie Tickets!</p>
-          <div style="font-size: 10px; color: #444; margin: 8px 0;">
-            1) Take a selfie with our pack.<br>
-            2) Tag our Instagram ID.<br>
-            3) Weekly lucky winners!
-          </div>
-          <a href="order.html" style="color:var(--primary); font-size: 11px; font-weight: 800; text-decoration: none;">ORDER NOW →</a>
+          <a href="order.html" style="color:var(--primary); font-size: 11px; font-weight: 800; text-decoration: none; display: block; margin-top: 10px;">ORDER NOW →</a>
         </div>
       </div>
-
-      <div class="menu-toggle" id="mobile-menu">
-        <i class="fas fa-bars"></i>
-      </div>
-
-      <nav class="nav-links" id="nav-menu">
-        <a href="index.html">HOME</a>
-        <a href="order.html">ORDER</a>
-        <a href="ABOUT.html">ABOUT</a>
-      </nav>
     </div>
+
+    <nav class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="order.html">ORDER</a>
+      <a href="ABOUT.html">ABOUT</a>
+    </nav>
   </header>
 
   <div id="movieOverlay" class="movie-modal-overlay">
@@ -189,10 +157,10 @@
 
   <section class="hero">
     <div class="hero-content">
-      <h4 style="color:var(--primary); letter-spacing:3px; font-weight: 800; font-size: 0.8rem;">ENGINEERED FLAVORS</h4>
-      <h1 style="font-family:'Playfair Display'; font-size: 3.5rem; line-height: 1.1; margin: 15px 0;">THE TASTE OF <br><span style="color:var(--primary)">TRADITION</span></h1>
+      <h4 style="color:var(--primary); letter-spacing:4px; font-weight: 800; font-size: 0.8rem;">ENGINEERED FLAVORS</h4>
+      <h1 style="font-family:'Playfair Display'; font-size: 4rem; line-height: 1.1; margin: 20px 0;">THE TASTE OF <br><span style="color:var(--primary)">TRADITION</span></h1>
       <p style="color:var(--text-gray); font-size: 1rem; margin-bottom: 30px;">Every spice precisely measured for the ultimate taste profile.</p>
-      <a href="#menu" class="btn" style="width: auto; padding: 12px 40px;">EXPLORE MENU</a>
+      <a href="#menu" class="btn">EXPLORE MENU</a>
     </div>
     <div class="hero-image">
       <img src="Chicken-Biryani-Recipe-removebg-preview.png" alt="Biryani Dish">
@@ -203,14 +171,13 @@
     <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem;">POPULAR SPECIALS</h2>
     <div class="grid">
       <div class="card">
-        <img src="Gemini_Generated_Image_j30lesj30lesj30l.png" alt="Chicken Biryani" style="width:100%; border-radius: 18px; height: 200px; object-fit: cover; margin-bottom: 15px;">
-        <h3 style="letter-spacing: 1px; font-size: 1.2rem; margin-bottom: 10px;">CHICKEN BIRIYANI</h3>
+        <img src="Gemini_Generated_Image_j30lesj30lesj30l.png" alt="Chicken Biryani" style="width:100%; border-radius: 18px; height: 180px; object-fit: cover; margin-bottom: 15px;">
+        <h3 style="letter-spacing: 1px; font-size: 1.1rem; margin-bottom: 10px;">CHICKEN BIRIYANI</h3>
         <div class="price-tag">
-          <p style="color: var(--primary); font-size: 0.9rem; font-weight: 800; margin-bottom: 5px;">★ SPECIAL OFFER ★</p>
           <span style="color:var(--text-gray); text-decoration: line-through; font-size: 0.9rem; margin-right: 10px;">Rs 199</span>
-          <span class="new-price">Rs 99</span>
+          <span style="color: var(--primary); font-size: 1.6rem; font-weight: 800;">Rs 99</span>
         </div>
-        <a href="order.html" class="btn" style="margin-top: 20px;">ORDER NOW</a>
+        <a href="order.html" class="btn" style="margin-top: 15px; width: 100%;">ORDER NOW</a>
       </div>
     </div>
   </section>
@@ -221,16 +188,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
-    const menuToggle = document.getElementById('mobile-menu');
-    const navMenu = document.getElementById('nav-menu');
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      menuToggle.querySelector('i').classList.toggle('fa-bars');
-      menuToggle.querySelector('i').classList.toggle('fa-times');
-    });
-
     document.addEventListener('DOMContentLoaded', () => {
-      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+      confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
       const overlay = document.getElementById('movieOverlay');
       const miniIcon = document.getElementById('miniIcon');
       const closeBtn = document.getElementById('closeBtn');
@@ -241,12 +200,8 @@
         miniIcon.classList.add('active');
         setTimeout(() => { overlay.style.display = 'none'; }, 500);
       }
-
-      const autoHide = setTimeout(showMiniIcon, 5000);
-      closeBtn.addEventListener('click', () => {
-        clearTimeout(autoHide);
-        showMiniIcon();
-      });
+      setTimeout(showMiniIcon, 5000);
+      closeBtn.addEventListener('click', showMiniIcon);
     });
   </script>
 </body>
