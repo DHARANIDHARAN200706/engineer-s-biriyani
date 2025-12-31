@@ -67,7 +67,7 @@
     .tc-wrapper { margin-bottom: 25px; }
     .tc-toggle-btn {
       width: 100%; background: rgba(249, 165, 22, 0.1); color: var(--primary);
-      border: 1px dashed var(--primary); padding: 12px; font-size: 12px;
+      border: 1px dashed var(--primary); padding: 12px; font-size: 11px;
       font-weight: 800; cursor: pointer; border-radius: 12px;
       display: flex; justify-content: space-between; align-items: center; transition: 0.3s;
     }
@@ -76,7 +76,7 @@
       border-radius: 0 0 12px 12px; border: 1px solid rgba(249, 165, 22, 0.2); border-top: none;
     }
     .tc-list { list-style: none; font-size: 0.8rem; color: var(--text-gray); line-height: 1.6; }
-    .tc-list li { margin-bottom: 8px; }
+    .tc-list li { margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px; }
     .tc-list i { color: var(--primary); margin-right: 8px; }
 
     /* --- Form Styling --- */
@@ -98,9 +98,11 @@
       border-radius: 12px; cursor: pointer; background: var(--primary); color: black;
       text-transform: uppercase; margin-top: 10px; transition: 0.3s;
     }
+    .btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
 
     /* --- Success State --- */
     #success-state { display: none; text-align: center; animation: fadeInUp 0.6s ease forwards; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .success-icon { font-size: 3.5rem; color: var(--whatsapp-green); margin-bottom: 15px; }
     .whatsapp-btn {
       display: flex; align-items: center; justify-content: center; gap: 10px;
@@ -147,15 +149,15 @@
       <div id="order-form-wrapper">
         <div class="tc-wrapper">
           <button type="button" class="tc-toggle-btn" onclick="toggleTC()">
-            <span><i class="fas fa-ticket-alt"></i> MOVIE TICKET TERMS & CONDITIONS</span>
+            <span><i class="fas fa-ticket-alt"></i> VIEW MOVIE TICKET T&C</span>
             <i class="fas fa-chevron-down" id="tc-chevron"></i>
           </button>
           <div id="tc-content">
             <ul class="tc-list">
-              <li><i class="fas fa-camera"></i> 1) Take a selfie with our pack or a pic of the pack.</li>
-              <li><i class="fas fa-share-square"></i> 2) Put it on your Story and tag our Insta ID.</li>
-              <li><i class="fas fa-trophy"></i> 3) We will select one winner from the entries.</li>
-              <li><i class="fas fa-rupee-sign"></i> 4) The ticket offer value is ₹180.</li>
+              <li><i class="fas fa-camera"></i> 1) Take a selfie with our pack or a pic.</li>
+              <li><i class="fas fa-share-square"></i> 2) Tag our Insta ID in your Story.</li>
+              <li><i class="fas fa-trophy"></i> 3) Weekly lucky winner selection.</li>
+              <li><i class="fas fa-rupee-sign"></i> 4) Ticket value capped at ₹180.</li>
             </ul>
           </div>
         </div>
@@ -196,7 +198,7 @@
 
           <div class="form-group">
             <label>Special Instructions</label>
-            <textarea name="feedback" rows="2" placeholder="e.g., Less spicy..."></textarea>
+            <textarea name="feedback" rows="2" placeholder="e.g., Less spicy, more onions..."></textarea>
           </div>
 
           <button class="btn" type="submit" id="submit-button">Place Order</button>
@@ -235,6 +237,7 @@
       }
     }
 
+    // Auto-calculate next Sunday
     document.addEventListener("DOMContentLoaded", function () {
       const dateInput = document.getElementById("date");
       const today = new Date();
@@ -244,6 +247,7 @@
       dateInput.value = nextSunday.toISOString().split('T')[0];
     });
 
+    // Form submission
     document.getElementById("form").addEventListener("submit", function (e) {
       e.preventDefault();
       const messageDiv = document.getElementById("message");
@@ -258,7 +262,8 @@
       const formData = new FormData(this);
       const formDataString = new URLSearchParams(formData).toString();
 
-      fetch("https://script.google.com/macros/s/AKfycbxzwOxGx-cuK6vHO4nZzWYFZ2GN1v_435zPHwdi6fLJlAKIoSOY_0HabveYswhcBAwE1w/exec", {
+      // Replace this URL with your actual Google Script Web App URL
+      fetch("https://script.google.com/macros/s/AKfycbwn28Qzz89XSfl-L_Z_Ay71yEAv9BtC-BP9jSTNUgZ6txHsVWhVS8I1OxEtdLtwPZCvFA/exec", {
         method: "POST",
         body: formDataString,
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
