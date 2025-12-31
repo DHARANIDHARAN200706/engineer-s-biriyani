@@ -17,202 +17,101 @@
       --text-gray: #b0b0b0;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg-dark); color: white; overflow-x: hidden; line-height: 1.6; }
+
+    /* --- BIRTHDAY CANVAS --- */
+    #birthday-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10001; }
+
+    /* --- JANAYAGAN POPUP (CENTER) --- */
+    .movie-modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center;
+      z-index: 9999; visibility: visible; opacity: 1; transition: 0.5s ease-in-out;
     }
-
-    body {
-      background-color: var(--bg-dark);
-      color: white;
-      overflow-x: hidden;
-      line-height: 1.6;
+    .movie-modal-content {
+      background: white; padding: 35px 20px 20px 20px; border-radius: 20px;
+      text-align: center; max-width: 400px; width: 90%; color: black; position: relative;
+      box-shadow: 0 0 30px var(--primary);
     }
+    .close-popup { position: absolute; top: 5px; right: 15px; font-size: 32px; font-weight: 300; color: #999; cursor: pointer; }
+    .movie-modal-content img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
 
-    /* --- TOP POPUP --- */
-    .movie-popup {
-      position: fixed;
-      top: -100px; 
-      left: 50%;
-      transform: translateX(-50%);
-      background: white;
-      color: black;
-      padding: 12px 30px;
-      border-radius: 0 0 25px 25px;
-      font-weight: 800;
-      font-size: 14px;
-      z-index: 2000;
-      box-shadow: 0 10px 30px rgba(249, 165, 22, 0.4);
-      border: 2px solid var(--primary);
-      border-top: none;
-      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      white-space: nowrap;
+    /* --- MINI FLOATING ICON (BOTTOM) --- */
+    .mini-movie-icon {
+      position: fixed; bottom: -100px; left: 30px; background: white; color: black;
+      padding: 10px 20px; border-radius: 50px; display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 10px 30px rgba(249, 165, 22, 0.6); border: 2px solid var(--primary);
+      z-index: 9000; transition: bottom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-decoration: none; font-weight: 700; font-size: 13px;
     }
+    .mini-movie-icon img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
+    .mini-movie-icon.active { bottom: 30px; animation: float-breathing 3s infinite ease-in-out; }
+    @keyframes float-breathing { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-    .movie-popup.show { top: 0; }
-
-    /* --- Navigation --- */
+    /* --- Navigation & Special Offer --- */
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 5%;
-      background: rgba(0,0,0,0.95);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(249, 165, 22, 0.3);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 5%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
+      position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(249, 165, 22, 0.3);
     }
-
-    .header-logo { height: 50px; transition: 0.3s; }
-
+    .header-logo { height: 50px; }
     .nav-links { display: flex; align-items: center; }
-    .nav-links a {
-      margin-left: 25px;
-      text-decoration: none;
-      color: white;
-      font-weight: 600;
-      font-size: 13px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: 0.3s;
-    }
-    .nav-links a:hover { color: var(--primary); }
+    .nav-links a { margin-left: 25px; text-decoration: none; color: white; font-weight: 600; font-size: 13px; text-transform: uppercase; }
 
     .offer-wrapper { position: relative; margin-left: 25px; }
     .special-offer-btn {
-      background: var(--primary);
-      color: black;
-      padding: 8px 16px;
-      border-radius: 4px;
-      font-weight: 800;
-      font-size: 11px;
-      cursor: pointer;
-      border: none;
+      background: var(--primary); color: black; padding: 8px 16px; border-radius: 4px;
+      font-weight: 800; font-size: 11px; cursor: pointer; border: none;
     }
-
     .offer-info-box {
-      display: none;
-      position: absolute;
-      top: 45px;
-      right: 0;
-      background: white;
-      color: black;
-      width: 250px;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+      display: none; position: absolute; top: 45px; right: 0; background: white;
+      color: black; width: 280px; padding: 20px; border-radius: 12px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5); text-align: left;
     }
     .offer-wrapper:hover .offer-info-box { display: block; }
+    .offer-info-box h4 { color: var(--primary); margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    .terms-text { font-size: 11px; line-height: 1.4; color: #444; margin-top: 10px; }
 
-    /* --- Hero --- */
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 60px 8%;
-      min-height: 70vh;
-      gap: 30px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    .hero-content { flex: 1; }
-    .hero-image { flex: 1; display: flex; justify-content: center; }
-    .hero-image img {
-      width: 100%;
-      max-width: 450px;
-      filter: drop-shadow(0 0 30px rgba(249, 165, 22, 0.4));
-      animation: spin-slow 20s linear infinite;
-    }
+    /* --- Hero & Grid --- */
+    .hero { display: flex; align-items: center; justify-content: space-between; padding: 60px 8%; min-height: 70vh; gap: 30px; max-width: 1400px; margin: 0 auto; }
+    .hero-image img { width: 100%; max-width: 450px; filter: drop-shadow(0 0 30px rgba(249, 165, 22, 0.4)); animation: spin-slow 20s linear infinite; }
+    @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-    @keyframes spin-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    /* --- Menu Grid (Optimized for Laptop) --- */
-    .section-container {
-      padding: 80px 5%;
-      text-align: center;
-    }
-
-    .grid {
-      display: grid;
-      /* Logic: At least 280px, but never larger than 350px per card */
-      grid-template-columns: repeat(auto-fit, minmax(280px, 350px));
-      gap: 40px;
-      margin: 50px auto 0 auto;
-      justify-content: center; /* Centers cards in the middle of the screen */
-      max-width: 1200px; /* Keeps the whole section from spreading too wide */
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 25px;
-      padding: 30px;
-      border: 1px solid rgba(255,255,255,0.05);
-      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      border-color: var(--primary);
-    }
-
-    .card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 20px;
-      margin-bottom: 20px;
-    }
-
-    .price-tag {
-        margin: 15px 0;
-        display: flex;
-        gap: 12px;
-        align-items: center;
-    }
-    .old-price { text-decoration: line-through; color: #666; font-size: 1.1rem; }
-    .new-price { color: var(--primary); font-size: 1.6rem; font-weight: 800; }
-
-    .btn {
-      background: var(--primary);
-      color: black;
-      padding: 14px 35px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 800;
-      transition: 0.3s;
-      display: inline-block;
-    }
-
+    .section-container { padding: 80px 5%; text-align: center; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 350px)); gap: 40px; margin-top: 50px; justify-content: center; }
+    .card { background: var(--card-bg); border-radius: 25px; padding: 30px; border: 1px solid rgba(255,255,255,0.05); text-align: center; }
+    .card img { width: 100%; height: 220px; object-fit: cover; border-radius: 20px; margin-bottom: 20px; }
+    
+    .price-tag { margin-bottom: 10px; }
+    .old-price { color: var(--text-gray); text-decoration: line-through; font-size: 1.2rem; margin-right: 10px; }
+    .new-price { color: var(--primary); font-size: 1.8rem; font-weight: 800; }
+    .special-offer-badge { color: var(--primary); font-weight: 800; font-size: 0.85rem; display: block; margin-bottom: 15px; letter-spacing: 1px; }
+    
+    .btn { background: var(--primary); color: black; padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: 800; display: inline-block; transition: 0.3s; }
     .btn:hover { background: var(--primary-hover); transform: scale(1.05); }
+    footer { padding: 60px 5%; background: var(--primary); color: black; text-align: center; }
 
-    footer {
-      padding: 60px 5%;
-      background: var(--primary);
-      color: black;
-      text-align: center;
-    }
-
-    @media (max-width: 768px) {
-      .hero { flex-direction: column-reverse; text-align: center; }
-      .nav-links { display: none; } /* Simplified for mobile */
-    }
+    @media (max-width: 768px) { .hero { flex-direction: column-reverse; text-align: center; } .nav-links { display: none; } }
   </style>
 </head>
 <body>
 
-  <div id="moviePopup" class="movie-popup">
-    🎬 Win 2 tickets for <b>Jananayagan</b> movie!
+  <canvas id="birthday-canvas"></canvas>
+
+  <div id="movieOverlay" class="movie-modal-overlay">
+    <div class="movie-modal-content">
+      <span class="close-popup" id="closeBtn">&times;</span>
+      <img src="janayagan.jpeg" alt="Janayagan Movie">
+      <h2 style="color:var(--primary); margin-bottom: 5px;">Happy Birthday! 🎂</h2>
+      <p>Win 2 tickets for <b>Janayagan</b> movie!</p>
+    </div>
   </div>
+
+  <a href="#" id="miniIcon" class="mini-movie-icon">
+    <img src="janayagan.jpeg" alt="Janayagan">
+    <span>Get 2 Tickets for Janayagan Movie!</span>
+  </a>
 
   <header>
     <img src="Engineers biriyani.png" alt="Logo" class="header-logo">
@@ -223,10 +122,16 @@
       <div class="offer-wrapper">
         <button class="special-offer-btn">SPECIAL OFFER</button>
         <div class="offer-info-box">
-          <h4 style="color:var(--primary)">DEAL OF THE DAY</h4>
-          <p style="font-size: 12px; margin: 5px 0;">Chicken Biryani Combo</p>
-          <p style="font-size: 20px; font-weight: 800;">Rs. 99</p>
-          <a href="order.html" style="color:var(--primary); font-size: 11px; font-weight: 800;">ORDER NOW</a>
+          <h4>TICKET OFFER</h4>
+          <p style="font-weight: 800; font-size: 14px;">Win ₹180 Movie Tickets!</p>
+          <div class="terms-text">
+            <strong>Terms & Conditions:</strong><br>
+            1) Take a selfie with our pack or a pic of the pack.<br>
+            2) Put it on your Story and tag our Insta ID.<br>
+            3) We will select one winner from the entries.<br>
+            4) The ticket offer value is ₹180.
+          </div>
+          <a href="order.html" style="color:var(--primary); font-size: 11px; font-weight: 800; text-decoration: none; display: block; margin-top: 10px;">ORDER NOW TO ENTER</a>
         </div>
       </div>
     </nav>
@@ -246,9 +151,8 @@
 
   <section class="section-container" id="menu">
     <h2 style="font-family: 'Playfair Display'; font-size: 2.8rem;">POPULAR SPECIALS</h2>
-    <p style="color: var(--text-gray);">Hand-crafted excellence in every plate</p>
-
     <div class="grid">
+      
       <div class="card">
         <img src="Gemini_Generated_Image_j30lesj30lesj30l.png" alt="Chicken Biryani">
         <h3>CHICKEN BIRIYANI</h3>
@@ -256,16 +160,9 @@
             <span class="old-price">Rs 199</span>
             <span class="new-price">Rs 99</span>
         </div>
+        <span class="special-offer-badge">★ SPECIAL OFFER ★</span>
         <a href="order.html" class="btn" style="padding: 10px 25px; font-size: 0.85rem;">ORDER NOW</a>
       </div>
-
-      </div>
-  </section>
-
-  <section class="section-container" style="background: #0a0a0a; margin-top: 50px; border-top: 1px solid #1a1a1a;">
-      <h2 style="font-family: 'Playfair Display';">WHY CHOOSE US?</h2>
-      <div style="max-width: 600px; margin: 20px auto; color: var(--text-gray);">
-          <p>We combine traditional slow-cooking methods with premium quality ingredients to bring you a biryani experience that is truly "Engineered" for perfection.</p>
       </div>
   </section>
 
@@ -273,19 +170,38 @@
     <p style="font-weight: 800;">© 2025 ENGINEERS BIRIYANI. ALL RIGHTS RESERVED.</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const popup = document.getElementById('moviePopup');
-      function cycle() {
-        popup.classList.add('show');
-        setTimeout(() => popup.classList.remove('show'), 4000);
+      // 1. Birthday Confetti
+      const duration = 4 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 11000 };
+      const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) return clearInterval(interval);
+        const particleCount = 40 * (timeLeft / duration);
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));
+      }, 250);
+
+      // 2. Logic for Popup and Floating Icon
+      const overlay = document.getElementById('movieOverlay');
+      const miniIcon = document.getElementById('miniIcon');
+      const closeBtn = document.getElementById('closeBtn');
+
+      function showMiniIcon() {
+        overlay.style.opacity = '0';
+        overlay.style.visibility = 'hidden';
+        miniIcon.classList.add('active');
       }
-      setTimeout(cycle, 1500);
-      setInterval(cycle, 8000);
+
+      const autoTimer = setTimeout(showMiniIcon, 6000);
+      closeBtn.addEventListener('click', () => {
+        clearTimeout(autoTimer);
+        showMiniIcon();
+      });
     });
   </script>
 
 </body>
 </html>
-
-
