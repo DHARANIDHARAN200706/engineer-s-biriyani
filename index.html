@@ -31,7 +31,34 @@
       line-height: 1.6;
     }
 
-    /* --- Header & Logo --- */
+    /* --- CONTINUOUS TOP POPUP STYLING --- */
+    .movie-popup {
+      position: fixed;
+      top: -100px; /* Start hidden above screen */
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      color: black;
+      padding: 12px 30px;
+      border-radius: 0 0 25px 25px; /* Rounded bottom only */
+      font-weight: 800;
+      font-size: 14px;
+      z-index: 2000; /* Higher than header */
+      box-shadow: 0 10px 30px rgba(249, 165, 22, 0.4);
+      border: 2px solid var(--primary);
+      border-top: none;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .movie-popup.show {
+      top: 0; /* Slide down to visible */
+    }
+
+    /* --- Header & Navigation --- */
     header {
       display: flex;
       justify-content: space-between;
@@ -50,6 +77,11 @@
       transition: 0.3s;
     }
 
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
     .nav-links a {
       margin-left: 25px;
       text-decoration: none;
@@ -62,6 +94,73 @@
     }
 
     .nav-links a:hover { color: var(--primary); }
+
+    /* --- Special Offer Hover Box --- */
+    .offer-wrapper {
+      position: relative;
+      margin-left: 25px;
+    }
+
+    .special-offer-btn {
+      background: var(--primary);
+      color: black;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 11px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .offer-info-box {
+      display: none;
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background: white;
+      color: black;
+      width: 250px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+      z-index: 1001;
+      text-align: left;
+    }
+
+    .offer-info-box::after {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      right: 20px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent transparent white transparent;
+    }
+
+    .offer-wrapper:hover .offer-info-box {
+      display: block;
+    }
+
+    .offer-info-box h5 {
+      color: var(--primary);
+      font-size: 16px;
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .offer-info-box p {
+      font-size: 13px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .offer-info-box .price-highlight {
+      font-size: 18px;
+      font-weight: 800;
+      color: #000;
+    }
 
     /* --- Hero Section --- */
     .hero {
@@ -103,7 +202,7 @@
       to { transform: rotate(360deg); }
     }
 
-    /* --- Branding Splash --- */
+    /* --- Branding Section --- */
     .branding-section {
         text-align: center;
         padding: 40px 20px;
@@ -153,7 +252,6 @@
       margin-bottom: 20px;
     }
 
-    /* Pricing & Badges */
     .price-tag {
         margin: 15px 0;
         display: flex;
@@ -204,17 +302,23 @@
       text-align: center;
     }
 
-    /* --- Responsive Queries --- */
     @media (max-width: 768px) {
-      header { flex-direction: column; gap: 15px; }
-      .nav-links a { margin: 0 10px; font-size: 11px; }
+      header { flex-direction: column; gap: 15px; padding: 20px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; }
+      .nav-links a { margin: 5px 10px; }
+      .offer-wrapper { margin-left: 0; margin-top: 10px; }
       .hero { flex-direction: column-reverse; text-align: center; }
       .hero-image img { max-width: 300px; }
       .branding-section h2 { font-size: 1.8rem; }
+      .movie-popup { width: 90%; font-size: 12px; white-space: normal; text-align: center;}
     }
   </style>
 </head>
 <body>
+
+  <div id="moviePopup" class="movie-popup">
+    🎬 A chance to win 2 tickets for Jananayagan movie!
+  </div>
 
   <header>
     <img src="Engineers biriyani.png" alt="Logo" class="header-logo">
@@ -222,6 +326,16 @@
       <a href="index.html">HOME</a>
       <a href="order.html">ORDER</a>
       <a href="ABOUT.html">ABOUT</a>
+      
+      <div class="offer-wrapper">
+        <button class="special-offer-btn">SPECIAL OFFER</button>
+        <div class="offer-info-box">
+          <h5>TODAY'S ENGINEER DEAL</h5>
+          <p>Get our world-class Signature Chicken Biryani at an unbeatable price!</p>
+          <p class="price-highlight">Now Only Rs. 99</p>
+          <a href="order.html" style="color: var(--primary); font-weight: 800; text-decoration: underline; margin-left: 0; font-size: 12px;">ORDER THIS DEAL NOW</a>
+        </div>
+      </div>
     </nav>
   </header>
 
@@ -285,6 +399,29 @@
     <p style="font-weight: 800; margin-bottom: 10px;">© 2025 ENGINEERS BIRIYANI. ALL RIGHTS RESERVED.</p>
     <button style="background: black; color: var(--primary); padding: 10px 25px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">CONTACT US</button>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const popup = document.getElementById('moviePopup');
+      
+      function runPopupCycle() {
+        // Step 1: Slide Down
+        popup.classList.add('show');
+        
+        // Step 2: Slide Up after 4 seconds
+        setTimeout(() => {
+          popup.classList.remove('show');
+        }, 4000);
+      }
+
+      // Initial Trigger (1 second after page load)
+      setTimeout(runPopupCycle, 1000);
+
+      // Repeat every 6 seconds 
+      // (4s visible + 2s hidden = 6s total cycle)
+      setInterval(runPopupCycle, 6000);
+    });
+  </script>
 
 </body>
 </html>
