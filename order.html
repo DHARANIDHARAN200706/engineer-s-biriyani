@@ -17,6 +17,7 @@
       --card-bg: #161616;
       --text-gray: #b0b0b0;
       --disabled-text: #666;
+      --whatsapp-green: #25D366;
     }
 
     * {
@@ -34,10 +35,10 @@
       flex-direction: column;
     }
 
-    /* --- MINI FLOATING ICON (NEW) --- */
+    /* --- MINI FLOATING ICON --- */
     .mini-movie-icon {
       position: fixed;
-      bottom: 25px; /* Visible by default on this page */
+      bottom: 25px;
       left: 20px;
       background: white;
       color: black;
@@ -56,24 +57,14 @@
       transition: 0.3s;
     }
 
-    .mini-movie-icon img {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+    .mini-movie-icon img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
 
     @keyframes float-breathing {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
 
-    .mini-movie-icon:hover {
-      transform: scale(1.05);
-      background: #fdfdfd;
-    }
-
-    /* --- Navigation & Logo --- */
+    /* --- Navigation --- */
     header.nav-bar {
       display: flex;
       justify-content: space-between;
@@ -87,8 +78,7 @@
       border-bottom: 1px solid rgba(249, 165, 22, 0.2);
     }
 
-    .header-logo { height: 55px; width: auto; transition: 0.3s; }
-    .header-logo:hover { transform: scale(1.05); }
+    .header-logo { height: 55px; width: auto; }
 
     .nav-links a {
       margin-left: 20px;
@@ -98,9 +88,8 @@
       font-size: 13px;
       text-transform: uppercase;
     }
-    .nav-links a:hover { color: var(--primary); }
 
-    /* --- Form Section --- */
+    /* --- Form & Success Container --- */
     .order-section {
       flex: 1;
       display: flex;
@@ -116,6 +105,7 @@
       border-radius: 24px;
       width: 100%;
       max-width: 500px;
+      position: relative;
     }
 
     .form-container h1 {
@@ -156,7 +146,42 @@
       text-transform: uppercase;
       margin-top: 10px;
     }
-    .btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
+
+    /* --- WhatsApp Success State (Hidden by default) --- */
+    #success-state {
+      display: none;
+      text-align: center;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .success-icon {
+      font-size: 4rem;
+      color: var(--whatsapp-green);
+      margin-bottom: 20px;
+    }
+
+    .whatsapp-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--whatsapp-green);
+      color: white;
+      text-decoration: none;
+      padding: 18px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-top: 25px;
+      transition: 0.3s;
+    }
+
+    .whatsapp-btn:hover { background: #1da851; transform: scale(1.02); }
 
     .message {
       display: none;
@@ -192,47 +217,62 @@
 
   <section class="order-section">
     <div class="form-container">
-      <h1>ORDER NOW</h1>
       
-      <form id="form">
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" name="name" placeholder="Enter your name" required />
-        </div>
+      <div id="order-form-wrapper">
+        <h1 id="form-title">ORDER NOW</h1>
+        <form id="form">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="name" placeholder="Enter your name" required />
+          </div>
 
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" name="email" placeholder="example@email.com" required />
-        </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="example@email.com" required />
+          </div>
 
-        <div class="form-group">
-          <label>Phone Number</label>
-          <input type="tel" name="phone" placeholder="10-digit mobile number" pattern="\d{10}" required />
-        </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" placeholder="10-digit mobile number" pattern="\d{10}" required />
+          </div>
 
-        <div class="form-group">
-            <label>Delivery Address <span class="tag-lock"><i class="fas fa-map-marker-alt"></i> FIXED LOCATION</span></label>
-            <textarea name="address" rows="2" readonly>CIT, Avinashi Road, Coimbatore - 641 014, Tamil Nadu</textarea>
-        </div>
+          <div class="form-group">
+              <label>Delivery Address <span class="tag-lock"><i class="fas fa-map-marker-alt"></i> FIXED LOCATION</span></label>
+              <textarea name="address" rows="2" readonly>CIT, Avinashi Road, Coimbatore - 641 014, Tamil Nadu</textarea>
+          </div>
 
-        <div style="display: flex; gap: 15px;">
-            <div class="form-group" style="flex: 1;">
-              <label>Delivery Date <span class="tag-lock">SUNDAY ONLY</span></label>
-              <input type="date" name="date" id="date" readonly required />
-            </div>
-            <div class="form-group" style="flex: 1;">
-              <label>Biryani Qty</label>
-              <input type="number" name="quantity" min="1" value="1" required />
-            </div>
-        </div>
+          <div style="display: flex; gap: 15px;">
+              <div class="form-group" style="flex: 1;">
+                <label>Delivery Date <span class="tag-lock">SUNDAY ONLY</span></label>
+                <input type="date" name="date" id="date" readonly required />
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label>Biryani Qty</label>
+                <input type="number" name="quantity" min="1" value="1" required />
+              </div>
+          </div>
 
-        <div class="form-group">
-          <label>Special Instructions</label>
-          <textarea name="feedback" rows="2" placeholder="e.g., Less spicy, more onions..."></textarea>
-        </div>
+          <div class="form-group">
+            <label>Special Instructions</label>
+            <textarea name="feedback" rows="2" placeholder="e.g., Less spicy, more onions..."></textarea>
+          </div>
 
-        <button class="btn" type="submit" id="submit-button">Place Order</button>
-      </form>
+          <button class="btn" type="submit" id="submit-button">Place Order</button>
+        </form>
+      </div>
+
+      <div id="success-state">
+        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+        <h1 style="color: white;">Order Confirmed!</h1>
+        <p style="color: var(--text-gray); line-height: 1.6; margin-top: 10px;">
+          Your delicious biryani is being processed. Join our WhatsApp group for exclusive updates!
+        </p>
+        
+        <a href="https://chat.whatsapp.com/JNFGE4Hsmv96bLYHKO78hc" target="_blank" class="whatsapp-btn">
+          <i class="fab fa-whatsapp"></i> JOIN WHATSAPP GROUP
+        </a>
+
+             </div>
 
       <div id="message" class="message">Processing your order...</div>
     </div>
@@ -242,6 +282,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      // Calculate next Sunday automatically
       const dateInput = document.getElementById("date");
       const today = new Date();
       let nextSunday = new Date();
@@ -260,6 +301,8 @@
       e.preventDefault();
       const messageDiv = document.getElementById("message");
       const submitBtn = document.getElementById("submit-button");
+      const formWrapper = document.getElementById("order-form-wrapper");
+      const successState = document.getElementById("success-state");
 
       messageDiv.textContent = "Processing your order...";
       messageDiv.style.display = "block";
@@ -276,9 +319,15 @@
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
-          messageDiv.textContent = "🎉 Order placed successfully!";
-          document.getElementById("form").reset();
-          setTimeout(() => window.location.reload(), 3000);
+          // Hide Form and Message
+          formWrapper.style.display = "none";
+          messageDiv.style.display = "none";
+          
+          // Show Success/WhatsApp Container
+          successState.style.display = "block";
+          
+          // Redirect to home after 15 seconds
+          setTimeout(() => window.location.href = "index.html", 15000);
         } else {
           messageDiv.textContent = data.message || "Error submitting form.";
           submitBtn.disabled = false;
