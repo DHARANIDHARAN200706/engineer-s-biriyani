@@ -31,34 +31,29 @@
       line-height: 1.6;
     }
 
-    /* --- CONTINUOUS TOP POPUP STYLING --- */
+    /* --- TOP POPUP --- */
     .movie-popup {
       position: fixed;
-      top: -100px; /* Start hidden above screen */
+      top: -100px; 
       left: 50%;
       transform: translateX(-50%);
       background: white;
       color: black;
       padding: 12px 30px;
-      border-radius: 0 0 25px 25px; /* Rounded bottom only */
+      border-radius: 0 0 25px 25px;
       font-weight: 800;
       font-size: 14px;
-      z-index: 2000; /* Higher than header */
+      z-index: 2000;
       box-shadow: 0 10px 30px rgba(249, 165, 22, 0.4);
       border: 2px solid var(--primary);
       border-top: none;
       transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
 
-    .movie-popup.show {
-      top: 0; /* Slide down to visible */
-    }
+    .movie-popup.show { top: 0; }
 
-    /* --- Header & Navigation --- */
+    /* --- Navigation --- */
     header {
       display: flex;
       justify-content: space-between;
@@ -72,16 +67,9 @@
       border-bottom: 1px solid rgba(249, 165, 22, 0.3);
     }
 
-    .header-logo {
-      height: 50px;
-      transition: 0.3s;
-    }
+    .header-logo { height: 50px; transition: 0.3s; }
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-    }
-
+    .nav-links { display: flex; align-items: center; }
     .nav-links a {
       margin-left: 25px;
       text-decoration: none;
@@ -92,26 +80,18 @@
       text-transform: uppercase;
       transition: 0.3s;
     }
-
     .nav-links a:hover { color: var(--primary); }
 
-    /* --- Special Offer Hover Box --- */
-    .offer-wrapper {
-      position: relative;
-      margin-left: 25px;
-    }
-
+    .offer-wrapper { position: relative; margin-left: 25px; }
     .special-offer-btn {
       background: var(--primary);
       color: black;
       padding: 8px 16px;
-      border: none;
       border-radius: 4px;
       font-weight: 800;
       font-size: 11px;
       cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      border: none;
     }
 
     .offer-info-box {
@@ -125,74 +105,25 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-      z-index: 1001;
-      text-align: left;
     }
+    .offer-wrapper:hover .offer-info-box { display: block; }
 
-    .offer-info-box::after {
-      content: "";
-      position: absolute;
-      bottom: 100%;
-      right: 20px;
-      border-width: 10px;
-      border-style: solid;
-      border-color: transparent transparent white transparent;
-    }
-
-    .offer-wrapper:hover .offer-info-box {
-      display: block;
-    }
-
-    .offer-info-box h5 {
-      color: var(--primary);
-      font-size: 16px;
-      margin-bottom: 8px;
-      font-weight: 800;
-    }
-
-    .offer-info-box p {
-      font-size: 13px;
-      margin-bottom: 10px;
-      color: #333;
-    }
-
-    .offer-info-box .price-highlight {
-      font-size: 18px;
-      font-weight: 800;
-      color: #000;
-    }
-
-    /* --- Hero Section --- */
+    /* --- Hero --- */
     .hero {
       display: flex;
-      flex-direction: row;
       align-items: center;
       justify-content: space-between;
       padding: 60px 8%;
       min-height: 70vh;
       gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
     }
-
     .hero-content { flex: 1; }
     .hero-image { flex: 1; display: flex; justify-content: center; }
-
-    .hero-content h4 {
-      color: var(--primary);
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .hero-content h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-
     .hero-image img {
       width: 100%;
-      max-width: 500px;
+      max-width: 450px;
       filter: drop-shadow(0 0 30px rgba(249, 165, 22, 0.4));
       animation: spin-slow 20s linear infinite;
     }
@@ -202,23 +133,7 @@
       to { transform: rotate(360deg); }
     }
 
-    /* --- Branding Section --- */
-    .branding-section {
-        text-align: center;
-        padding: 40px 20px;
-        border-bottom: 1px solid var(--primary);
-    }
-    .branding-section img {
-        width: 180px;
-        margin-bottom: 10px;
-    }
-    .branding-section h2 {
-        font-family: 'Playfair Display', serif;
-        font-size: 2.5rem;
-        letter-spacing: 2px;
-    }
-
-    /* --- Menu Grid --- */
+    /* --- Menu Grid (Optimized for Laptop) --- */
     .section-container {
       padding: 80px 5%;
       text-align: center;
@@ -226,17 +141,23 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin-top: 50px;
+      /* Logic: At least 280px, but never larger than 350px per card */
+      grid-template-columns: repeat(auto-fit, minmax(280px, 350px));
+      gap: 40px;
+      margin: 50px auto 0 auto;
+      justify-content: center; /* Centers cards in the middle of the screen */
+      max-width: 1200px; /* Keeps the whole section from spreading too wide */
     }
 
     .card {
       background: var(--card-bg);
       border-radius: 25px;
-      padding: 25px;
+      padding: 30px;
       border: 1px solid rgba(255,255,255,0.05);
       transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .card:hover {
@@ -246,7 +167,7 @@
 
     .card img {
       width: 100%;
-      height: 200px;
+      height: 220px;
       object-fit: cover;
       border-radius: 20px;
       margin-bottom: 20px;
@@ -255,27 +176,12 @@
     .price-tag {
         margin: 15px 0;
         display: flex;
-        justify-content: center;
-        align-items: center;
         gap: 12px;
+        align-items: center;
     }
     .old-price { text-decoration: line-through; color: #666; font-size: 1.1rem; }
     .new-price { color: var(--primary); font-size: 1.6rem; font-weight: 800; }
 
-    .coming-soon {
-        display: inline-block;
-        padding: 6px 20px;
-        border: 1px dashed var(--primary);
-        color: var(--primary);
-        border-radius: 50px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        margin-top: 10px;
-    }
-
-    .unavailable-img { filter: grayscale(1); opacity: 0.5; }
-
-    /* --- CTA Button --- */
     .btn {
       background: var(--primary);
       color: black;
@@ -283,18 +189,12 @@
       border-radius: 50px;
       text-decoration: none;
       font-weight: 800;
-      display: inline-block;
       transition: 0.3s;
-      border: none;
-      cursor: pointer;
+      display: inline-block;
     }
 
-    .btn:hover {
-      background: var(--primary-hover);
-      box-shadow: 0 0 20px rgba(249, 165, 22, 0.5);
-    }
+    .btn:hover { background: var(--primary-hover); transform: scale(1.05); }
 
-    /* --- Footer --- */
     footer {
       padding: 60px 5%;
       background: var(--primary);
@@ -303,21 +203,15 @@
     }
 
     @media (max-width: 768px) {
-      header { flex-direction: column; gap: 15px; padding: 20px; }
-      .nav-links { flex-wrap: wrap; justify-content: center; }
-      .nav-links a { margin: 5px 10px; }
-      .offer-wrapper { margin-left: 0; margin-top: 10px; }
       .hero { flex-direction: column-reverse; text-align: center; }
-      .hero-image img { max-width: 300px; }
-      .branding-section h2 { font-size: 1.8rem; }
-      .movie-popup { width: 90%; font-size: 12px; white-space: normal; text-align: center;}
+      .nav-links { display: none; } /* Simplified for mobile */
     }
   </style>
 </head>
 <body>
 
   <div id="moviePopup" class="movie-popup">
-    🎬 A chance to win 2 tickets for Jananayagan movie!
+    🎬 Win 2 tickets for <b>Jananayagan</b> movie!
   </div>
 
   <header>
@@ -326,41 +220,33 @@
       <a href="index.html">HOME</a>
       <a href="order.html">ORDER</a>
       <a href="ABOUT.html">ABOUT</a>
-      
       <div class="offer-wrapper">
         <button class="special-offer-btn">SPECIAL OFFER</button>
         <div class="offer-info-box">
-          <h5>TODAY'S ENGINEER DEAL</h5>
-          <p>Get our world-class Signature Chicken Biryani at an unbeatable price!</p>
-          <p class="price-highlight">Now Only Rs. 99</p>
-          <a href="order.html" style="color: var(--primary); font-weight: 800; text-decoration: underline; margin-left: 0; font-size: 12px;">ORDER THIS DEAL NOW</a>
+          <h4 style="color:var(--primary)">DEAL OF THE DAY</h4>
+          <p style="font-size: 12px; margin: 5px 0;">Chicken Biryani Combo</p>
+          <p style="font-size: 20px; font-weight: 800;">Rs. 99</p>
+          <a href="order.html" style="color:var(--primary); font-size: 11px; font-weight: 800;">ORDER NOW</a>
         </div>
       </div>
     </nav>
   </header>
 
-  <div class="branding-section">
-      <img src="Engineers biriyani.png" alt="Logo">
-      <h2>ENGINEERS BIRIYANI</h2>
-  </div>
-
   <section class="hero">
     <div class="hero-content">
-      <h4>Master of Spices</h4>
-      <h1>THE TASTE OF <span style="color: var(--primary);">TRADITION</span></h1>
-      <p style="color: var(--text-gray); margin-bottom: 30px;">
-        Every grain is engineered for the perfect bite. Experience the finest blend of spices and premium quality ingredients.
-      </p>
-      <a href="#menu" class="btn">VIEW MENU</a>
+      <h4 style="color:var(--primary); letter-spacing:4px;">ENGINEERED FLAVORS</h4>
+      <h1 style="font-family:'Playfair Display'; font-size: clamp(2.5rem, 5vw, 4.5rem);">THE TASTE OF <span style="color:var(--primary)">TRADITION</span></h1>
+      <p style="color:var(--text-gray); margin: 20px 0 30px 0; max-width: 500px;">Experience biryani where every spice is precisely measured for the ultimate taste profile.</p>
+      <a href="#menu" class="btn">EXPLORE MENU</a>
     </div>
     <div class="hero-image">
-      <img src="Chicken-Biryani-Recipe-removebg-preview.png" alt="Signature Biryani">
+      <img src="Chicken-Biryani-Recipe-removebg-preview.png" alt="Biryani Dish">
     </div>
   </section>
 
   <section class="section-container" id="menu">
-    <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; margin-bottom: 10px;">POPULAR SPECIALS</h2>
-    <p style="color: var(--text-gray);">Indulge in our finest collections</p>
+    <h2 style="font-family: 'Playfair Display'; font-size: 2.8rem;">POPULAR SPECIALS</h2>
+    <p style="color: var(--text-gray);">Hand-crafted excellence in every plate</p>
 
     <div class="grid">
       <div class="card">
@@ -370,48 +256,34 @@
             <span class="old-price">Rs 199</span>
             <span class="new-price">Rs 99</span>
         </div>
-        <a href="order.html" class="btn" style="padding: 10px 20px; font-size: 0.8rem;">ORDER NOW</a>
+        <a href="order.html" class="btn" style="padding: 10px 25px; font-size: 0.85rem;">ORDER NOW</a>
       </div>
 
-     
+      </div>
   </section>
 
-  <section class="section-container" style="background: #0a0a0a; border-radius: 50px 50px 0 0;">
-      <h2 style="font-family: 'Playfair Display'; margin-bottom: 20px;">Why Choose Us?</h2>
-      <div style="max-width: 700px; margin: 0 auto; color: var(--text-gray);">
-          <p>We bring you a perfect blend of spices and love in every bite. Made fresh daily with the highest quality ingredients, our biryani is a celebration of flavor.</p>
-          <img src="Chicken-Biryani-Recipe-removebg-preview.png" style="width: 150px; margin-top: 30px; opacity: 0.6;">
+  <section class="section-container" style="background: #0a0a0a; margin-top: 50px; border-top: 1px solid #1a1a1a;">
+      <h2 style="font-family: 'Playfair Display';">WHY CHOOSE US?</h2>
+      <div style="max-width: 600px; margin: 20px auto; color: var(--text-gray);">
+          <p>We combine traditional slow-cooking methods with premium quality ingredients to bring you a biryani experience that is truly "Engineered" for perfection.</p>
       </div>
   </section>
 
   <footer>
-    <p style="font-weight: 800; margin-bottom: 10px;">© 2025 ENGINEERS BIRIYANI. ALL RIGHTS RESERVED.</p>
-    <button style="background: black; color: var(--primary); padding: 10px 25px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">CONTACT US</button>
+    <p style="font-weight: 800;">© 2025 ENGINEERS BIRIYANI. ALL RIGHTS RESERVED.</p>
   </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const popup = document.getElementById('moviePopup');
-      
-      function runPopupCycle() {
-        // Step 1: Slide Down
+      function cycle() {
         popup.classList.add('show');
-        
-        // Step 2: Slide Up after 4 seconds
-        setTimeout(() => {
-          popup.classList.remove('show');
-        }, 4000);
+        setTimeout(() => popup.classList.remove('show'), 4000);
       }
-
-      // Initial Trigger (1 second after page load)
-      setTimeout(runPopupCycle, 1000);
-
-      // Repeat every 6 seconds 
-      // (4s visible + 2s hidden = 6s total cycle)
-      setInterval(runPopupCycle, 6000);
+      setTimeout(cycle, 1500);
+      setInterval(cycle, 8000);
     });
   </script>
 
 </body>
 </html>
-
