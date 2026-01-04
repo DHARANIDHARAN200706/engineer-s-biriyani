@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Confirm Order | Engineer's Biryani</title>
+  <title>Pre-Order | Engineer's Biryani</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
@@ -45,7 +45,6 @@
       50% { transform: translateY(-10px); }
     }
 
-    /* --- Navigation --- */
     header.nav-bar {
       display: flex; justify-content: space-between; align-items: center;
       padding: 10px 5%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
@@ -54,7 +53,6 @@
     .header-logo { height: 50px; width: auto; }
     .nav-links a { margin-left: 20px; text-decoration: none; color: white; font-weight: 600; font-size: 13px; text-transform: uppercase; }
 
-    /* --- Form Container --- */
     .order-section {
       flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 20px;
     }
@@ -63,23 +61,18 @@
       padding: 30px; border-radius: 24px; width: 100%; max-width: 500px;
     }
 
-    /* --- Terms & Conditions Section --- */
-    .tc-wrapper { margin-bottom: 25px; }
-    .tc-toggle-btn {
-      width: 100%; background: rgba(249, 165, 22, 0.1); color: var(--primary);
-      border: 1px dashed var(--primary); padding: 12px; font-size: 11px;
-      font-weight: 800; cursor: pointer; border-radius: 12px;
-      display: flex; justify-content: space-between; align-items: center; transition: 0.3s;
+    /* --- Pre-booking Info Box --- */
+    .prebooking-info {
+      background: rgba(249, 165, 22, 0.1);
+      border: 1px solid var(--primary);
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      text-align: center;
     }
-    #tc-content {
-      display: none; background: rgba(255,255,255,0.03); padding: 15px;
-      border-radius: 0 0 12px 12px; border: 1px solid rgba(249, 165, 22, 0.2); border-top: none;
-    }
-    .tc-list { list-style: none; font-size: 0.8rem; color: var(--text-gray); line-height: 1.6; }
-    .tc-list li { margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px; }
-    .tc-list i { color: var(--primary); margin-right: 8px; }
+    .prebooking-info h4 { color: var(--primary); font-size: 0.9rem; margin-bottom: 5px; }
+    .prebooking-info p { font-size: 0.75rem; color: var(--text-gray); line-height: 1.4; }
 
-    /* --- Form Styling --- */
     .form-container h1 {
       font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary);
       margin-bottom: 20px; text-align: center;
@@ -91,8 +84,7 @@
       border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; font-size: 14px;
     }
     input[readonly], textarea[readonly] { background: rgba(0, 0, 0, 0.4); color: #999; cursor: not-allowed; }
-    .tag-lock { font-size: 9px; background: #332200; color: var(--primary); padding: 3px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
-
+    
     .btn {
       width: 100%; padding: 15px; font-size: 16px; font-weight: 800; border: none;
       border-radius: 12px; cursor: pointer; background: var(--primary); color: black;
@@ -100,7 +92,6 @@
     }
     .btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
 
-    /* --- Success State --- */
     #success-state { display: none; text-align: center; animation: fadeInUp 0.6s ease forwards; }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .success-icon { font-size: 3.5rem; color: var(--whatsapp-green); margin-bottom: 15px; }
@@ -116,21 +107,9 @@
     }
 
     footer { text-align: center; padding: 20px; color: var(--text-gray); font-size: 0.8rem; }
-
-    /* --- RESPONSIVE --- */
-    @media (max-width: 600px) {
-      .nav-links a { margin-left: 12px; font-size: 11px; }
-      .mini-movie-icon span { display: none; }
-      .flex-mobile { flex-direction: column; gap: 0 !important; }
-    }
   </style>
 </head>
 <body>
-
-  <a href="index.html" class="mini-movie-icon">
-    <img src="janayagan.jpeg" alt="Janayagan">
-    <span>Win 2 Movie Tickets! See Offer</span>
-  </a>
 
   <header class="nav-bar">
     <div class="logo">
@@ -147,24 +126,16 @@
     <div class="form-container">
       
       <div id="order-form-wrapper">
-        <div class="tc-wrapper">
-          <button type="button" class="tc-toggle-btn" onclick="toggleTC()">
-            <span><i class="fas fa-ticket-alt"></i> VIEW MOVIE TICKET T&C</span>
-            <i class="fas fa-chevron-down" id="tc-chevron"></i>
-          </button>
-          <div id="tc-content">
-            <ul class="tc-list">
-              <li><i class="fas fa-camera"></i> 1) Take a selfie with our pack or a pic.</li>
-              <li><i class="fas fa-share-square"></i> 2) Tag our Insta ID in your Story.</li>
-              <li><i class="fas fa-trophy"></i> 3) Weekly lucky winner selection.</li>
-              <li><i class="fas fa-rupee-sign"></i> 4) Ticket value capped at ₹180.</li>
-            </ul>
-          </div>
+        <div class="prebooking-info">
+          <h4><i class="fas fa-clock"></i> FUTURE PRE-BOOKING OPEN</h4>
+          <p>This week's slots are full. Book now for our next available slot. We will notify you via WhatsApp/SMS once the date is fixed!</p>
         </div>
 
-        <h1>ORDER NOW</h1>
+        <h1>PRE-ORDER</h1>
         
         <form id="form">
+          <input type="hidden" name="date" value="TBN (To Be Notified)">
+
           <div class="form-group">
             <label>Full Name</label>
             <input type="text" name="name" placeholder="Enter your name" required />
@@ -181,73 +152,43 @@
           </div>
 
           <div class="form-group">
-              <label>Delivery Address <span class="tag-lock"><i class="fas fa-map-marker-alt"></i> FIXED</span></label>
-              <textarea name="address" rows="2" readonly>CIT, Avinashi Road, Coimbatore - 641 014, Tamil Nadu</textarea>
+            <label>Quantity</label>
+            <input type="number" name="quantity" min="1" value="1" required />
           </div>
 
-          <div style="display: flex; gap: 15px;" class="flex-mobile">
-              <div class="form-group" style="flex: 1;">
-                <label>Date <span class="tag-lock">SUNDAY ONLY</span></label>
-                <input type="date" name="date" id="date" readonly required />
-              </div>
-              <div class="form-group" style="flex: 1;">
-                <label>Biryani Qty</label>
-                <input type="number" name="quantity" min="1" value="1" required />
-              </div>
+          <div class="form-group">
+              <label>Pick-up Point (Fixed)</label>
+              <textarea name="address" rows="1" readonly>CIT, Avinashi Road, Coimbatore</textarea>
           </div>
 
           <div class="form-group">
             <label>Special Instructions</label>
-            <textarea name="feedback" rows="2" placeholder="e.g., Less spicy, more onions..."></textarea>
+            <textarea name="feedback" rows="2" placeholder="Any specific requirements?"></textarea>
           </div>
 
-          <button class="btn" type="submit" id="submit-button">Place Order</button>
+          <button class="btn" type="submit" id="submit-button">Confirm Pre-Order</button>
         </form>
       </div>
 
       <div id="success-state">
-        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
-        <h2 style="color: white; margin-bottom: 10px;">Order Confirmed!</h2>
-        <p style="color: var(--text-gray); font-size: 0.9rem;">Join our community for delivery updates!</p>
+        <div class="success-icon"><i class="fas fa-user-clock"></i></div>
+        <h2 style="color: white; margin-bottom: 10px;">Priority List Joined!</h2>
+        <p style="color: var(--text-gray); font-size: 0.9rem;">Thank you! We have received your pre-order request. Stay tuned for the date announcement!</p>
         
         <a href="https://chat.whatsapp.com/JNFGE4Hsmv96bLYHKO78hc" target="_blank" class="whatsapp-btn">
-          <i class="fab fa-whatsapp"></i> JOIN WHATSAPP GROUP
+          <i class="fab fa-whatsapp"></i> JOIN COMMUNITY FOR UPDATES
         </a>
         
-        <p style="margin-top: 30px; font-size: 0.7rem; color: var(--disabled-text);">Redirecting to home in 15 seconds...</p>
+        <p style="margin-top: 30px; font-size: 0.7rem; color: var(--disabled-text);">Redirecting to home in 10 seconds...</p>
       </div>
 
-      <div id="message" class="message">Processing your order...</div>
+      <div id="message" class="message">Connecting to server...</div>
     </div>
   </section>
 
   <footer>&copy; 2025 Engineer Biryani. All rights reserved.</footer>
 
   <script>
-    // Toggle Terms and Conditions
-    function toggleTC() {
-      const content = document.getElementById("tc-content");
-      const chevron = document.getElementById("tc-chevron");
-      if (content.style.display === "block") {
-        content.style.display = "none";
-        chevron.style.transform = "rotate(0deg)";
-      } else {
-        content.style.display = "block";
-        chevron.style.transform = "rotate(180deg)";
-      }
-    }
-
-    // Auto-calculate next Sunday
-    document.addEventListener("DOMContentLoaded", function () {
-      const dateInput = document.getElementById("date");
-      const today = new Date();
-      let nextSunday = new Date();
-      const daysUntilSunday = (7 - today.getDay()) % 7 || 7;  
-      nextSunday.setDate(today.getDate() + daysUntilSunday);
-      dateInput.value = nextSunday.toISOString().split('T')[0];
-    });
-
-    // Form submission
     document.getElementById("form").addEventListener("submit", function (e) {
       e.preventDefault();
       const messageDiv = document.getElementById("message");
@@ -255,14 +196,14 @@
       const formWrapper = document.getElementById("order-form-wrapper");
       const successState = document.getElementById("success-state");
 
-      messageDiv.textContent = "Processing your order...";
+      messageDiv.textContent = "Processing your request...";
       messageDiv.style.display = "block";
       submitBtn.disabled = true;
 
       const formData = new FormData(this);
       const formDataString = new URLSearchParams(formData).toString();
 
-      // Replace this URL with your actual Google Script Web App URL
+      // Your existing Google Apps Script URL
       fetch("https://script.google.com/macros/s/AKfycbwn28Qzz89XSfl-L_Z_Ay71yEAv9BtC-BP9jSTNUgZ6txHsVWhVS8I1OxEtdLtwPZCvFA/exec", {
         method: "POST",
         body: formDataString,
@@ -274,19 +215,17 @@
           formWrapper.style.display = "none";
           messageDiv.style.display = "none";
           successState.style.display = "block";
-          setTimeout(() => window.location.href = "index.html", 15000);
+          setTimeout(() => window.location.href = "index.html", 10000);
         } else {
           messageDiv.textContent = data.message || "Error submitting form.";
           submitBtn.disabled = false;
         }
       })
       .catch(() => {
-        messageDiv.textContent = "An error occurred while submitting.";
+        messageDiv.textContent = "Connection error. Please check your internet.";
         submitBtn.disabled = false;
       });
     });
   </script>
 </body>
 </html>
-
-
