@@ -34,7 +34,6 @@
       flex-direction: column;
     }
 
-    /* --- Navigation & Logo --- */
     header.nav-bar {
       display: flex;
       justify-content: space-between;
@@ -55,9 +54,7 @@
       transition: 0.3s;
     }
     
-    .header-logo:hover {
-        transform: scale(1.05);
-    }
+    .header-logo:hover { transform: scale(1.05); }
 
     .nav-links a {
       margin-left: 20px;
@@ -72,7 +69,6 @@
 
     .nav-links a:hover { color: var(--primary); }
 
-    /* --- Form Section --- */
     .order-section {
       flex: 1;
       display: flex;
@@ -100,9 +96,7 @@
       text-align: center;
     }
 
-    .form-group {
-      margin-bottom: 18px;
-    }
+    .form-group { margin-bottom: 18px; }
 
     label {
       font-size: 0.8rem;
@@ -114,7 +108,7 @@
       letter-spacing: 0.5px;
     }
 
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       background: rgba(255, 255, 255, 0.05);
       padding: 12px 15px;
@@ -123,15 +117,19 @@
       color: white;
       font-size: 14px;
       transition: 0.3s;
+      outline: none;
     }
 
-    /* Fixed/Locked Fields Styling */
-    input[readonly], textarea[readonly], input:disabled {
+    select option {
+      background: #161616;
+      color: white;
+    }
+
+    input[readonly], input:disabled {
       background: rgba(0, 0, 0, 0.4);
       border-color: rgba(249, 165, 22, 0.1);
       color: #999;
       cursor: not-allowed;
-      font-weight: 500;
     }
 
     .tag-lock {
@@ -215,9 +213,12 @@
         </div>
 
         <div class="form-group">
-            <label>Delivery Address <span class="tag-lock"><i class="fas fa-map-marker-alt"></i> FIXED LOCATION</span></label>
-            <textarea name="address" rows="2" readonly>1) CIT MAIN ENTRANCE GATE 
-2) PSG HOSTEL GATE (IM)</textarea>
+          <label>Delivery Address <span class="tag-lock"><i class="fas fa-map-marker-alt"></i> SELECT LOCATION</span></label>
+          <select name="address" required>
+              <option value="" disabled selected>Select a delivery point</option>
+              <option value="CIT MAIN ENTRANCE GATE">CIT Main Entrance Gate</option>
+              <option value="PSG HOSTEL GATE (IM)">PSG Hostel Gate (IM)</option>
+          </select>
         </div>
 
         <div style="display: flex; gap: 15px;">
@@ -231,8 +232,6 @@
             </div>
         </div>
 
-     
-    
         <div class="form-group">
           <label>Special Instructions</label>
           <textarea name="feedback" rows="2" placeholder="e.g., Less spicy, more onions..."></textarea>
@@ -251,23 +250,16 @@
     document.addEventListener("DOMContentLoaded", function () {
       const dateInput = document.getElementById("date");
       const today = new Date();
-
-      // Calculate the upcoming Sunday
       let nextSunday = new Date();
-      const dayOfWeek = today.getDay(); // 0 (Sun) to 6 (Sat)
-      
-      // logic: Find how many days to add to get to Sunday (0)
-      // If today is Sunday, we move to the next Sunday (+7 days)
+      const dayOfWeek = today.getDay(); 
       const daysUntilSunday = (7 - dayOfWeek) % 7 || 7; 
       
       nextSunday.setDate(today.getDate() + daysUntilSunday);
 
-      // Format to YYYY-MM-DD
       const yyyy = nextSunday.getFullYear();
       const mm = String(nextSunday.getMonth() + 1).padStart(2, '0');
       const dd = String(nextSunday.getDate()).padStart(2, '0');
       
-      // Set the fixed value
       dateInput.value = `${yyyy}-${mm}-${dd}`;
     });
 
@@ -283,6 +275,7 @@
       const formData = new FormData(this);
       const formDataString = new URLSearchParams(formData).toString();
 
+      // Ensure this URL matches your LATEST Deployment URL from Apps Script
       fetch("https://script.google.com/macros/s/AKfycbwn28Qzz89XSfl-L_Z_Ay71yEAv9BtC-BP9jSTNUgZ6txHsVWhVS8I1OxEtdLtwPZCvFA/exec", {
         method: "POST",
         body: formDataString,
@@ -293,7 +286,6 @@
         if (data.status === "success") {
           messageDiv.textContent = "🎉 Order placed successfully!";
           document.getElementById("form").reset();
-          // Reload to ensure the fixed Sunday date is recalculated/reapplied
           setTimeout(() => window.location.reload(), 3000);
         } else {
           messageDiv.textContent = data.message || "Error submitting form.";
@@ -308,5 +300,3 @@
   </script>
 </body>
 </html>
-
-
