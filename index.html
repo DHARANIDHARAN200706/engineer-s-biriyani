@@ -31,7 +31,6 @@
     .header-top { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
     .header-logo { height: 35px; }
     
-    /* Nav links: Always visible, no hamburger */
     .nav-links { display: flex; align-items: center; gap: 15px; margin-top: 5px; }
     .nav-links a { 
       text-decoration: none; color: white; 
@@ -53,14 +52,12 @@
     }
     .offer-wrapper:hover .offer-info-box { display: block; }
 
-    /* --- Desktop Adjustments (Laptop view) --- */
     @media (min-width: 768px) {
       header { flex-direction: row; justify-content: space-between; padding: 10px 8%; }
       .header-top { width: auto; margin-bottom: 0; }
       .header-logo { height: 45px; }
       .nav-links { margin-top: 0; gap: 30px; }
       .nav-links a { font-size: 13px; }
-      .header-right { display: flex; align-items: center; gap: 25px; }
     }
 
     /* --- Hero Section --- */
@@ -78,25 +75,13 @@
     }
     @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-    /* --- Movie Popup --- */
-    .movie-modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center;
-      z-index: 10002; visibility: visible; opacity: 1; transition: 0.5s;
-    }
-    .movie-modal-content {
-      background: white; padding: 30px; border-radius: 20px;
-      text-align: center; max-width: 380px; width: 90%; color: black; position: relative;
-    }
-    .close-popup { position: absolute; top: 10px; right: 15px; font-size: 28px; color: #999; cursor: pointer; }
-
+    /* --- Mini Movie Icon --- */
     .mini-movie-icon {
-      position: fixed; bottom: -100px; left: 20px; background: white; color: black;
+      position: fixed; bottom: 20px; left: 20px; background: white; color: black;
       padding: 10px 18px; border-radius: 50px; display: flex; align-items: center; gap: 12px;
-      z-index: 9000; transition: 0.8s; text-decoration: none; font-weight: 700; font-size: 11px;
-      border: 2px solid var(--primary);
+      z-index: 9000; text-decoration: none; font-weight: 700; font-size: 11px;
+      border: 2px solid var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
-    .mini-movie-icon.active { bottom: 20px; }
     .mini-movie-icon img { width: 30px; height: 30px; border-radius: 50%; }
 
     /* --- Menu Section --- */
@@ -107,7 +92,6 @@
 
     footer { padding: 40px 5%; background: var(--primary); color: black; text-align: center; font-weight: 800; font-size: 0.8rem; }
 
-    /* Mobile Hero Fixes */
     @media (max-width: 768px) {
       .hero { flex-direction: column-reverse; text-align: center; padding: 40px 5%; }
       .hero-content h1 { font-size: 2.5rem !important; }
@@ -124,17 +108,7 @@
     <div class="header-top">
       <a href="index.html"><img src="Engineers biriyani.png" alt="Logo" class="header-logo"></a>
       
-      <div class="offer-wrapper">
-        <button class="special-offer-btn">SPECIAL OFFER</button>
-        <div class="offer-info-box">
-          <h4 style="color:var(--primary); font-size: 14px; margin-bottom: 5px;">TICKET OFFER</h4>
-          <p style="font-weight: 800; font-size: 12px;">Win ₹180 Movie Tickets!</p>
-           <p style="font-weight: 800; font-size: 12px;"> 1) Take a selfie with our pack or a pic!</p>
-           <p style="font-weight: 800; font-size: 12px;"> 2) Tag our Insta ID in your Story</p>
-           <p style="font-weight: 800; font-size: 12px;">3) Weekly lucky winner selection.</p>
-          <a href="order.html" style="color:var(--primary); font-size: 11px; font-weight: 800; text-decoration: none; display: block; margin-top: 10px;">ORDER NOW →</a>
-        </div>
-      </div>
+      
     </div>
 
     <nav class="nav-links">
@@ -144,21 +118,7 @@
     </nav>
   </header>
 
-  <div id="movieOverlay" class="movie-modal-overlay">
-    <div class="movie-modal-content">
-      <span class="close-popup" id="closeBtn">&times;</span>
-      <img src="janayagan.jpeg" alt="Janayagan Movie">
-      <h2 style="color:var(--primary); font-size: 22px;">Special offer!</h2>
-      <p style="font-size: 14px;">Win 2 tickets for <b>Janayagan</b> movie!</p>
-      
-    </div>
-  </div>
-
-  <a href="order.html" id="miniIcon" class="mini-movie-icon">
-    <img src="janayagan.jpeg" alt="Janayagan">
-    <span>Get 2 Tickets for Janayagan Movie!</span>
-  </a>
-
+ 
   <section class="hero">
     <div class="hero-content">
       <h4 style="color:var(--primary); letter-spacing:4px; font-weight: 800; font-size: 0.8rem;">ENGINEERED FLAVORS</h4>
@@ -191,24 +151,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
-      const overlay = document.getElementById('movieOverlay');
-      const miniIcon = document.getElementById('miniIcon');
-      const closeBtn = document.getElementById('closeBtn');
-
-      function showMiniIcon() {
-        overlay.style.opacity = '0';
-        overlay.style.visibility = 'hidden';
-        miniIcon.classList.add('active');
-        setTimeout(() => { overlay.style.display = 'none'; }, 500);
-      }
-      setTimeout(showMiniIcon, 5000);
-      closeBtn.addEventListener('click', showMiniIcon);
-    });
-  </script>
+ 
 </body>
 </html>
-
-
