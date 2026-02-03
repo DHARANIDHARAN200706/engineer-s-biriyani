@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bookings Closed | Engineer's Biryani</title>
+  <title>Confirm Order | Engineer's Biryani</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
@@ -17,7 +17,6 @@
       --card-bg: #161616;
       --text-gray: #b0b0b0;
       --whatsapp-green: #25D366;
-      --danger: #ff4747;
     }
 
     * {
@@ -88,41 +87,16 @@
       width: 100%;
       max-width: 500px;
       text-align: center;
-      position: relative;
-    }
-
-    /* Closed Badge */
-    .closed-badge {
-        background: var(--danger);
-        color: white;
-        padding: 5px 15px;
-        border-radius: 50px;
-        font-size: 12px;
-        font-weight: 800;
-        display: inline-block;
-        margin-bottom: 10px;
-        text-transform: uppercase;
     }
 
     .form-container h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
-      color: var(--text-gray);
-      margin-bottom: 10px;
+      color: var(--primary);
+      margin-bottom: 20px;
     }
 
-    .status-notice {
-        background: rgba(255, 71, 71, 0.1);
-        border: 1px solid var(--danger);
-        color: var(--danger);
-        padding: 12px;
-        border-radius: 12px;
-        font-size: 0.9rem;
-        margin-bottom: 25px;
-        font-weight: 600;
-    }
-
-    .form-group { margin-bottom: 18px; text-align: left; opacity: 0.5; pointer-events: none; }
+    .form-group { margin-bottom: 18px; text-align: left; }
 
     label {
       font-size: 0.8rem;
@@ -134,30 +108,80 @@
       letter-spacing: 0.5px;
     }
 
-    input, textarea, select {
+    input, textarea {
       width: 100%;
       background: rgba(255, 255, 255, 0.05);
       padding: 12px 15px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
-      color: #666;
+      color: white;
       font-size: 14px;
+      transition: 0.3s;
       outline: none;
     }
 
-    .btn-closed {
+    /* SPECIFIC SELECT STYLING FOR BLACK TEXT */
+    select {
+      width: 100%;
+      background: #ffffff; /* White background for the box */
+      padding: 12px 15px;
+      border: 1px solid var(--primary);
+      border-radius: 12px;
+      color: #000000; /* Black text color */
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+
+    select option {
+      color: #000000; /* Black text for dropdown items */
+      background: #ffffff;
+    }
+
+    input[readonly] {
+      background: rgba(0, 0, 0, 0.4);
+      color: #999;
+      cursor: not-allowed;
+    }
+
+    .tag-lock {
+        font-size: 9px;
+        background: #332200;
+        color: var(--primary);
+        padding: 3px 8px;
+        border-radius: 4px;
+        margin-left: 8px;
+        vertical-align: middle;
+    }
+
+    .btn {
       width: 100%;
       padding: 15px;
       font-size: 16px;
       font-weight: 800;
       border: none;
       border-radius: 12px;
-      background: #333;
-      color: #777;
+      cursor: pointer;
+      transition: 0.3s;
+      background: var(--primary);
+      color: black;
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-top: 10px;
-      cursor: not-allowed;
+    }
+
+    .btn:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-2px); }
+    .btn:disabled { background: #444; color: #777; cursor: not-allowed; }
+
+    #success-container {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .whatsapp-card {
@@ -165,7 +189,7 @@
       border: 1px solid var(--whatsapp-green);
       padding: 25px;
       border-radius: 18px;
-      margin-top: 30px;
+      margin-top: 20px;
     }
 
     .whatsapp-btn {
@@ -185,6 +209,16 @@
     }
 
     .whatsapp-btn:hover { background: #1da851; transform: scale(1.02); }
+
+    .message {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: bold;
+      background: rgba(249, 165, 22, 0.1);
+      color: var(--primary);
+      display: none;
+    }
 
     footer { text-align: center; padding: 20px; color: var(--text-gray); font-size: 0.8rem; }
 
@@ -210,47 +244,125 @@
   <section class="order-section">
     <div class="form-container">
       
-      <div class="closed-badge">Sold Out</div>
-      <h1>BOOKINGS CLOSED</h1>
-      <div class="status-notice">
-        <i class="fas fa-exclamation-circle"></i> We are fully booked for this Sunday.
+      <div id="form-wrapper">
+        <h1>ORDER NOW</h1>
+        <form id="form">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="name" placeholder="Enter your name" required />
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="example@email.com" required />
+          </div>
+
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" placeholder="10-digit mobile number" pattern="\d{10}" required />
+          </div>
+
+          <div class="form-group">
+            <label>Delivery Address <span class="tag-lock"><i class="fas fa-map-marker-alt"></i> SELECT LOCATION</span></label>
+            <select name="address" required>
+                <option value="" disabled selected>Select a delivery point</option>
+                <option value="CIT MAIN ENTRANCE GATE">CIT Main Entrance Gate</option>
+                <option value="PSG HOSTEL GATE (IM)">PSG Hostel Gate (IM)</option>
+            </select>
+          </div>
+
+          <div style="display: flex; gap: 15px;">
+              <div class="form-group" style="flex: 1;">
+                <label>Delivery Date <span class="tag-lock">SUN ONLY</span></label>
+                <input type="date" name="date" id="date" readonly required />
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label>Qty</label>
+                <input type="number" name="quantity" min="1" value="1" required />
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label>Special Instructions</label>
+            <textarea name="feedback" rows="2" placeholder="e.g., Less spicy..."></textarea>
+          </div>
+
+          <button class="btn" type="submit" id="submit-button">Place Order</button>
+        </form>
       </div>
 
-      <form id="form">
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" placeholder="Orders currently unavailable" disabled />
-        </div>
-
-        <div class="form-group">
-          <label>Delivery Address</label>
-          <select disabled>
-              <option>Bookings Closed</option>
-          </select>
-        </div>
-
-        <button class="btn-closed" type="button">Bookings Closed</button>
-      </form>
-
-      <div class="whatsapp-card">
-        <h3 style="color: var(--whatsapp-green); font-size: 1.1rem; margin-bottom: 10px;">Don't Miss Out Next Week!</h3>
-        <p style="font-size: 0.85rem; color: #ddd;">Join our WhatsApp community to get notified as soon as bookings open for the next batch.</p>
+      <div id="success-container">
+        <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--whatsapp-green); margin-bottom: 15px;"></i>
+        <h1>ORDER RECEIVED!</h1>
+        <p style="color: var(--text-gray); line-height: 1.5;">Your biryani is being engineered for perfection.</p>
         
-        <a href="https://chat.whatsapp.com/JNFGE4Hsmv96bLYHKO78hc" target="_blank" class="whatsapp-btn">
-          <i class="fab fa-whatsapp"></i> JOIN FOR UPDATES
-        </a>
+        <div class="whatsapp-card">
+          <h3 style="color: var(--whatsapp-green); font-size: 1.1rem; margin-bottom: 10px;">Stay Updated!</h3>
+          <p style="font-size: 0.85rem; color: #ddd;">Join our WhatsApp group for live delivery tracking and Sunday specials.</p>
+          
+          <a href="https://chat.whatsapp.com/JNFGE4Hsmv96bLYHKO78hc" target="_blank" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i> JOIN THE GROUP
+          </a>
+        </div>
       </div>
-      
+
+      <div id="message" class="message">Processing your order...</div>
     </div>
   </section>
 
   <footer>&copy; 2025 Engineer Biryani. All rights reserved.</footer>
 
   <script>
-    // Script is deactivated to prevent any accidental submissions
+    document.addEventListener("DOMContentLoaded", function () {
+      const dateInput = document.getElementById("date");
+      const today = new Date();
+      let nextSunday = new Date();
+      const dayOfWeek = today.getDay(); 
+      const daysUntilSunday = (7 - dayOfWeek) % 7 || 7; 
+      
+      nextSunday.setDate(today.getDate() + daysUntilSunday);
+
+      const yyyy = nextSunday.getFullYear();
+      const mm = String(nextSunday.getMonth() + 1).padStart(2, '0');
+      const dd = String(nextSunday.getDate()).padStart(2, '0');
+      
+      dateInput.value = `${yyyy}-${mm}-${dd}`;
+    });
+
     document.getElementById("form").addEventListener("submit", function (e) {
       e.preventDefault();
-      alert("Bookings are currently closed. Please join our WhatsApp group for updates.");
+      const messageDiv = document.getElementById("message");
+      const submitBtn = document.getElementById("submit-button");
+      const formWrapper = document.getElementById("form-wrapper");
+      const successContainer = document.getElementById("success-container");
+
+      messageDiv.textContent = "Processing your order...";
+      messageDiv.style.display = "block";
+      submitBtn.disabled = true;
+
+      const formData = new FormData(this);
+      const formDataString = new URLSearchParams(formData).toString();
+
+      fetch("https://script.google.com/macros/s/AKfycbwn28Qzz89XSfl-L_Z_Ay71yEAv9BtC-BP9jSTNUgZ6txHsVWhVS8I1OxEtdLtwPZCvFA/exec", {
+        method: "POST",
+        body: formDataString,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          messageDiv.style.display = "none";
+          formWrapper.style.display = "none";
+          successContainer.style.display = "block";
+        } else {
+          messageDiv.textContent = data.message || "Error submitting form.";
+          submitBtn.disabled = false;
+        }
+      })
+      .catch(() => {
+        messageDiv.textContent = "An error occurred. Please try again.";
+        submitBtn.disabled = false;
+      });
     });
   </script>
 </body>
